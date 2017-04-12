@@ -1,4 +1,4 @@
 # Plazza
 Epitech Plazza project
 
-BITE
+BITE x2
