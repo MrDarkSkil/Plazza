@@ -7,6 +7,7 @@
 # Precompiled Headers
 *.gch
 *.pch
+*.tags*
 
 # Compiled Dynamic libraries
 *.so
