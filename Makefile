@@ -16,7 +16,8 @@ NAME            =       plazza
 CXXFLAGS	+=	-I./includes
 CXXFLAGS	+=	-Wextra -Wall -W
 
-SRC             =       src/main.cpp
+SRC             =       src/main.cpp	\
+			src/orders.cpp
 
 OBJ             =       $(SRC:.cpp=.o)
 
