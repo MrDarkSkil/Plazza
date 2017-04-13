@@ -7,7 +7,7 @@ RED             =       "\033[1;31m"
 YELLOW		=	"\033[1;33m"
 BLUE		=	"\033[1;34m"
 
-CC              =       g++ -g -g3
+CC              =       g++ -g -g3 -lpthread
 
 RM              =       rm -f
 
@@ -18,6 +18,8 @@ CXXFLAGS	+=	-Wextra -Wall -W
 
 SRC             =       src/main.cpp	\
 			src/orders.cpp
+			src/Mutex.cpp	\
+			src/ScopedLock.cpp
 
 OBJ             =       $(SRC:.cpp=.o)
 
