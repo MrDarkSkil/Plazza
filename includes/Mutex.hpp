@@ -5,7 +5,7 @@
 ** Login	gastal_r
 **
 ** Started on	Thu Apr 13 17:22:27 2017 gastal_r
-** Last update	Sat Apr 15 11:47:49 2017 gastal_r
+** Last update	Sat Apr 15 21:12:20 2017 gastal_r
 */
 
 #ifndef         _MUTEX_HPP_
@@ -17,14 +17,17 @@
 class Mutex : public IMutex
 {
 public:
-  Mutex(void);
+  Mutex(void)  { pthread_mutex_init(&_mutex, nullptr); }
+  ~Mutex(void) { pthread_mutex_destroy(&_mutex); }
 
-  void        lock(void);
-  void        unlock(void);
-  bool        trylock(void);
+  Mutex(const Mutex& other) = default;
+  Mutex(Mutex&& other) = default;
+  Mutex& operator=(const Mutex& other) = default;
+  Mutex& operator=(Mutex&& other) = default;
 
-  const pthread_mutex_t &getMutex() const { return (_mutex); }
-
+  void        lock(void)    { pthread_mutex_lock(&_mutex); }
+  void        unlock(void)  { pthread_mutex_unlock(&_mutex); }
+  bool        trylock(void) { return (pthread_mutex_trylock(&_mutex)); }
 
 private:
   pthread_mutex_t _mutex;

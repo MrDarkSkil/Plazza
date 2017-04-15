@@ -18,8 +18,8 @@ CXXFLAGS	+=	-Wextra -Wall -W
 
 SRC             =       src/main.cpp		\
 			src/Orders.cpp		\
-			src/Mutex.cpp		\
 			src/ScopedLock.cpp	\
+			src/SafeQueue.cpp	\
 			src/Thread.cpp
 
 OBJ             =       $(SRC:.cpp=.o)
