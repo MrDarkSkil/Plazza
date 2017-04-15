@@ -1,9 +1,9 @@
 //
 // orders.cpp for Project-Master in /home/sellet_f/Projets/Tek2/Plazza
-// 
+//
 // Made by sellet_f
 // Login   <flavien.sellet@epitech.eu>
-// 
+//
 // Started on  Thu Apr 13 14:34:02 2017 sellet_f
 // Last update Thu Apr 13 14:45:37 2017 sellet_f
 //
@@ -43,11 +43,11 @@ int		Orders::fillOrders(std::vector<Orders> &orders, std::string command)
     return -1;
   orders.push_back(newOrder);
   std::cout << "Files = ";
-  for (std::vector<std::string>::iterator it = newOrder.files.begin() ; it != newOrder.files.end() ; ++it)
-    std::cout << *it << "; ";
+  for (const auto & it : newOrder.files)
+    std::cout << it << "; ";
   std::cout << std::endl << "Command = ";
-  for (std::vector<Information>::iterator it = newOrder.infos.begin() ; it != newOrder.infos.end() ; ++it)
-    std::cout << *it << "; ";
+  for (const auto & it : newOrder.infos)
+    std::cout << (int) it << "; ";
   std::cout << std::endl;
   return 0;
 }

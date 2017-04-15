@@ -5,7 +5,7 @@
 ** Login	gastal_r
 **
 ** Started on	Thu Apr 13 17:22:27 2017 gastal_r
-** Last update	Thu Apr 13 21:53:45 2017 gastal_r
+** Last update	Sat Apr 15 11:47:49 2017 gastal_r
 */
 
 #ifndef         _MUTEX_HPP_
@@ -18,15 +18,12 @@ class Mutex : public IMutex
 {
 public:
   Mutex(void);
-  virtual ~Mutex(void);
-  Mutex( Mutex &);
-  Mutex  &operator=( Mutex &mutex);
 
   void        lock(void);
   void        unlock(void);
   bool        trylock(void);
 
-  pthread_mutex_t &getMutex()  { return (_mutex); }
+  const pthread_mutex_t &getMutex() const { return (_mutex); }
 
 
 private:

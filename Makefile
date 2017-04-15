@@ -17,7 +17,7 @@ CXXFLAGS	+=	-I./includes
 CXXFLAGS	+=	-Wextra -Wall -W
 
 SRC             =       src/main.cpp	\
-			src/orders.cpp
+			src/Orders.cpp	\
 			src/Mutex.cpp	\
 			src/ScopedLock.cpp
 
