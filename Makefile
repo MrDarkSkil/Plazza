@@ -16,10 +16,11 @@ NAME            =       plazza
 CXXFLAGS	+=	-I./includes
 CXXFLAGS	+=	-Wextra -Wall -W
 
-SRC             =       src/main.cpp	\
-			src/Orders.cpp	\
-			src/Mutex.cpp	\
-			src/ScopedLock.cpp
+SRC             =       src/main.cpp		\
+			src/Orders.cpp		\
+			src/Mutex.cpp		\
+			src/ScopedLock.cpp	\
+			src/Thread.cpp
 
 OBJ             =       $(SRC:.cpp=.o)
 

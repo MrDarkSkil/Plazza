@@ -5,14 +5,14 @@
 ** Login	gastal_r
 **
 ** Started on	Thu Apr 13 18:30:17 2017 gastal_r
-** Last update	Fri Apr 14 22:13:08 2017 gastal_r
+** Last update	Sat Apr 15 13:50:59 2017 gastal_r
 */
 
 #include      "Mutex.hpp"
 
 Mutex::Mutex(void)
 {
-  _mutex = PTHREAD_MUTEX_INITIALIZER;
+  pthread_mutex_init(&_mutex, nullptr);
 }
 
 void        Mutex::lock(void)
