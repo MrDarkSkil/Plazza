@@ -1,5 +1,5 @@
 //
-// Orders.hh for Project-Master in /home/sellet_f/Projets/Tek2/Plazza
+// Orders.hpp for Project-Master in /home/sellet_f/Projets/Tek2/Plazza
 //
 // Made by sellet_f
 // Login   <flavien.sellet@epitech.eu>

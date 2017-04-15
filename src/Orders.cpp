@@ -8,7 +8,7 @@
 // Last update Thu Apr 13 14:45:37 2017 sellet_f
 //
 
-#include "Orders.hh"
+#include "Orders.hpp"
 
 Orders		Orders::setInfos(std::string &token, Orders newOrder)
 {
