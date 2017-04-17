@@ -18,9 +18,9 @@ class         Thread : public IThread
 public:
   explicit Thread (void) : _status(Status::NOT_STARTED) {};
 
-  Status      getStatus(void) const;
-  void        waitThread(void);
-  void        startThread(void *(*)(void*));
+  Status      getStatus(void) const             { return (_status); }
+  void        waitThread(void)                  { pthread_join(_thread, nullptr); }
+  void        startThread(void *(*func)(void*)) { pthread_create(&_thread, nullptr, func, nullptr); }
 
 private:
   Status      _status;
