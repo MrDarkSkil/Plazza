@@ -16,8 +16,8 @@
 class         ScopedLock
 {
 public:
-  explicit    ScopedLock(Mutex &);
-  virtual     ~ScopedLock(void);
+  explicit    ScopedLock(Mutex &mutex) : _mutex(mutex) { _mutex.lock(); }
+  virtual     ~ScopedLock(void) { _mutex.unlock(); }
 
   ScopedLock(const ScopedLock &) = default;
   ScopedLock(ScopedLock &&) = default;

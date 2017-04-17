@@ -11,7 +11,7 @@
 #ifndef         _MUTEX_HPP_
 #define         _MUTEX_HPP_
 
-#include        <pthread.h>
+#include        <thread>
 #include        "IMutex.hh"
 
 class Mutex : public IMutex
@@ -28,6 +28,8 @@ public:
   void        lock(void)    { pthread_mutex_lock(&_mutex); }
   void        unlock(void)  { pthread_mutex_unlock(&_mutex); }
   bool        trylock(void) { return (pthread_mutex_trylock(&_mutex)); }
+
+  pthread_mutex_t  &getMutex(void) { return (_mutex); }
 
 private:
   pthread_mutex_t _mutex;

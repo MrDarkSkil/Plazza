@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Apr 15 23:32:01 2017 gastal_r
-// Last update Sat Apr 15 23:58:14 2017 gastal_r
+// Last update Mon Apr 17 11:59:17 2017 gastal_r
 //
 
 #ifndef         _CONDVAR_HPP_
@@ -25,9 +25,9 @@ public:
   CondVar& operator=(const CondVar& other) = default;
   CondVar& operator=(CondVar&& other) = default;
 
-  //TODO void wait(void)  { pthread_cond_wait() }
-  void signal(void)       { pthread_cond_signal(&_cond); }
-  void broadcast(void)    { pthread_cond_broadcast(&_cond); }
+  void wait(pthread_mutex_t *mutex) { pthread_cond_wait(&_cond, mutex); }
+  void broadcast(void)              { pthread_cond_broadcast(&_cond); }
+  void signal(void)                 { pthread_cond_signal(&_cond); }
 
 private:
   pthread_cond_t  _cond;

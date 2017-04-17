@@ -18,7 +18,6 @@ CXXFLAGS	+=	-Wextra -Wall -W
 
 SRC             =       src/main.cpp		\
 			src/Orders.cpp		\
-			src/ScopedLock.cpp	\
 			src/SafeQueue.cpp	\
 			src/Thread.cpp
 

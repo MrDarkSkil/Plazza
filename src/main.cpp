@@ -9,6 +9,11 @@
 */
 
 #include "Orders.hpp"
+#include "Mutex.hpp"
+#include "ScopedLock.hpp"
+#include "Thread.hpp"
+#include "CondVar.hpp"
+#include "SafeQueue.hpp"
 
 int         main(int argc, char const *argv[])
 {
