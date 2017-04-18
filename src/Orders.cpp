@@ -5,7 +5,7 @@
 // Login   <flavien.sellet@epitech.eu>
 //
 // Started on  Thu Apr 13 14:34:02 2017 sellet_f
-// Last update Thu Apr 13 14:45:37 2017 sellet_f
+// Last update Mon Apr 17 18:50:05 2017 sellet_f
 //
 
 #include "Orders.hpp"
@@ -39,16 +39,9 @@ int		Orders::fillOrders(std::vector<Orders> &orders, std::string command)
   token = command.substr(0, pos);
   newOrder = Orders::setInfos(token, newOrder);
 
-  if (newOrder.infos.size() == 0)
+  if (newOrder.infos.size() == 0 || newOrder.files.size() == 0)
     return -1;
   orders.push_back(newOrder);
-  std::cout << "Files = ";
-  for (const auto & it : newOrder.files)
-    std::cout << it << "; ";
-  std::cout << std::endl << "Command = ";
-  for (const auto & it : newOrder.infos)
-    std::cout << (int) it << "; ";
-  std::cout << std::endl;
   return 0;
 }
 
