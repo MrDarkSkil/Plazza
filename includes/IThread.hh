@@ -27,9 +27,9 @@ public:
 public:
   virtual         ~IThread() {};
 
-  virtual Status  getStatus() const = 0;
+  virtual Status  getStatus() = 0;
   virtual void    waitThread() = 0;
-  virtual void    startThread(void *(*)(void*)) = 0;
+  virtual void    startThread(void *(*)(void*), void *) = 0;
 };
 
 #endif        /* !_ITHREAD_HH_ */

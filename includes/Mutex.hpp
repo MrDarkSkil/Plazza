@@ -17,17 +17,17 @@
 class Mutex : public IMutex
 {
 public:
-  Mutex(void)  { pthread_mutex_init(&_mutex, nullptr); }
-  ~Mutex(void) { pthread_mutex_destroy(&_mutex); }
+  Mutex(void);
+  ~Mutex(void);
 
   Mutex(const Mutex& other) = default;
   Mutex(Mutex&& other) = default;
   Mutex& operator=(const Mutex& other) = default;
   Mutex& operator=(Mutex&& other) = default;
 
-  void        lock(void)    { pthread_mutex_lock(&_mutex); }
-  void        unlock(void)  { pthread_mutex_unlock(&_mutex); }
-  bool        trylock(void) { return (pthread_mutex_trylock(&_mutex)); }
+  void        lock(void);
+  void        unlock(void);
+  bool        trylock(void);
 
   pthread_mutex_t  &getMutex(void) { return (_mutex); }
 

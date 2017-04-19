@@ -12,17 +12,25 @@
 #define       _THREAD_HPP_
 
 #include      "IThread.hh"
+#include      "Mutex.hpp"
 
 class         Thread : public IThread
 {
 public:
-  explicit Thread (void) : _status(Status::NOT_STARTED) {};
+  explicit Thread (void);
+  ~Thread();
+  Thread(const Thread& other) = default;
+  Thread(Thread&& other) = default;
+  Thread& operator=(const Thread& other) = default;
+  Thread& operator=(Thread&& other) = default;
 
-  Status      getStatus(void) const             { return (_status); }
-  void        waitThread(void)                  { pthread_join(_thread, nullptr); }
-  void        startThread(void *(*func)(void*)) { pthread_create(&_thread, nullptr, func, nullptr); }
+  void        waitThread(void);
+  void        startThread(void *(*func)(void *), void *arg);
+
+  Status      getStatus(void);
 
 private:
+  Mutex       _mutex;
   Status      _status;
   pthread_t   _thread;
 };
