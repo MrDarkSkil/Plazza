@@ -19,7 +19,8 @@ CXXFLAGS	+=	-Wextra -Wall -W
 SRC             =       src/main.cpp		\
 			src/Orders.cpp		\
 			src/Parser.cpp		\
-			src/SafeQueue.cpp
+			src/SafeQueue.cpp	\
+			src/Crypted.cpp
 
 OBJ             =       $(SRC:.cpp=.o)
 

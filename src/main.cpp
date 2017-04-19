@@ -21,8 +21,12 @@ int         main(int argc, char const *argv[])
   std::string		commands;
 
   for (std::string line; std::getline(std::cin, line);)
-    if (Orders::parseLine(orders, line) == -1)
-      return -1;
+    {
+      std::cout << "line == " << line << std::endl;
+      if (Orders::parseLine(orders, line) == -1)
+	return -1;
+      orders.clear();
+    }
 
   (void) argc;
   (void) argv;
