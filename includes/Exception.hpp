@@ -5,7 +5,7 @@
 ** Login	gastal_r
 **
 ** Started on	Thu Mar 02 17:13:18 2017 Full Name
-** Last update	Thu Apr 13 14:11:52 2017 gastal_r
+** Last update Wed Apr 19 13:10:24 2017 Leo Hubert Froideval
 */
 
 #ifndef     _EXCEPTION_HPP_
@@ -14,11 +14,10 @@
 #include    <exception>
 #include    <string>
 
-namespace arcade
+
+class Exception : public std::exception
 {
-  class Exception : public std::exception
-  {
-  public:
+ public:
     explicit Exception(const std::string &message) : _message(message) {;}
     Exception(const std::string &message, const std::string &var) : _message(message)
     {
@@ -27,9 +26,8 @@ namespace arcade
     virtual ~Exception() throw() {};
     virtual const char* what() const throw() { return(_message.c_str());}
 
-  private:
+ private:
     std::string   _message;
-  };
-}
+};
 
 #endif /* !_EXCEPTION_HPP_ */

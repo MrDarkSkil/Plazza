@@ -16,17 +16,17 @@
 
 class	Orders
 {
+public:
+  static Orders	setInfos(std::string &, Orders);
+  static int	fillOrders(std::vector<Orders> &, std::string);
+  static int	parseLine(std::vector<Orders> &, std::string);
+
   enum class Information
   {
     PHONE_NUMBER,
     EMAIL_ADDRESS,
     IP_ADDRESS
   };
-
-public:
-  static Orders	setInfos(std::string &, Orders);
-  static int	fillOrders(std::vector<Orders> &, std::string);
-  static int	parseLine(std::vector<Orders> &, std::string);
 
 private:
   std::vector<std::string>	files;
