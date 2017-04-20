@@ -5,7 +5,7 @@
 // Login   <flavien.sellet@epitech.eu>
 //
 // Started on  Thu Apr 13 02:08:15 2017 sellet_f
-// Last update Thu Apr 20 12:32:18 2017 sellet_f
+// Last update Thu Apr 20 14:22:01 2017 gastal_r
 //
 
 #ifndef     _ORDERS_HH_
@@ -26,9 +26,9 @@ class	Orders
 {
 public:
   int	setInfos(std::string &, Information &);
-  std::vector<std::pair<std::string, Information>>	getOrders(void);
-  int	fillOrders(std::string);
-  int	parseLine(std::string);
+  std::vector<std::pair<std::string, Information>>	&getOrders(void);
+  int	fillOrders(std::string &);
+  int	parseLine(std::string &);
   void	clear(void);
 
 private:

@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Wed Apr 19 12:23:03 2017 Leo Hubert Froideval
-** Last update Wed Apr 19 12:54:22 2017 Leo Hubert Froideval
+** Last update Thu Apr 20 14:23:49 2017 gastal_r
 */
 
 #ifndef PARSER_HPP_
@@ -22,9 +22,9 @@
 class Parser
 {
 public:
-    Parser(std::string const &, Orders::Information const &);
+    Parser(std::string const &, Information const &);
     void setFile(std::string const &);
-    void setInformation(Orders::Information const &);
+    void setInformation(Information const &);
     void parseFile();
 
     ~Parser() = default;
@@ -34,7 +34,7 @@ public:
     Parser& operator=(Parser&& other) = default;
 private:
     std::string _file;
-    Orders::Information _information;
+    Information _information;
 };
 
 #endif /* !PARSER_HPP_ */

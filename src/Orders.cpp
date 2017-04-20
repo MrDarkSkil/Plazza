@@ -5,7 +5,7 @@
 // Login   <flavien.sellet@epitech.eu>
 //
 // Started on  Thu Apr 13 14:34:02 2017 sellet_f
-// Last update Thu Apr 20 12:33:47 2017 sellet_f
+// Last update Thu Apr 20 14:22:03 2017 gastal_r
 //
 
 #include "Orders.hpp"
@@ -30,7 +30,7 @@ int		Orders::setInfos(std::string &token, Information &info)
   return (0);
 }
 
-int						Orders::fillOrders(std::string command)
+int						Orders::fillOrders(std::string &command)
 {
   std::pair<std::string, Information>		newOrder;
   std::string					token;
@@ -71,17 +71,16 @@ void		Orders::clear(void)
   _orders.clear();
 }
 
-std::vector<std::pair<std::string, Information>>	Orders::getOrders(void)
+std::vector<std::pair<std::string, Information>>	&Orders::getOrders(void)
 {
   return (_orders);
 }
 
-int		Orders::parseLine(std::string commands)
+int		Orders::parseLine(std::string &commands)
 {
   std::string	token;
   size_t	pos;
 
-  pos = 0;
   while ((pos = commands.find(";")) != std::string::npos)
     {
       token = commands.substr(0, pos);

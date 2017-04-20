@@ -5,12 +5,12 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Wed Apr 19 12:32:15 2017 Leo Hubert Froideval
-** Last update Wed Apr 19 13:14:20 2017 Leo Hubert Froideval
+** Last update Thu Apr 20 14:23:24 2017 gastal_r
 */
 
 #include "Parser.hpp"
 
-Parser::Parser(std::string const &file, Orders::Information const &information)
+Parser::Parser(std::string const &file, Information const &information)
 {
     _file = file;
     _information = information;
@@ -21,7 +21,7 @@ void Parser::setFile(std::string const &file)
     _file = file;
 }
 
-void Parser::setInformation(Orders::Information const &information)
+void Parser::setInformation(Information const &information)
 {
     _information = information;
 }
@@ -29,11 +29,11 @@ void Parser::parseFile()
 {
     std::regex rgx("");
 
-    if (_information == Orders::Information::IP_ADDRESS)
+    if (_information == Information::IP_ADDRESS)
         rgx = "(\\d{1,3}(\\.\\d{1,3}){3})";
-    else if (_information == Orders::Information::EMAIL_ADDRESS)
+    else if (_information == Information::EMAIL_ADDRESS)
         rgx = "(\\d{1,3}(\\.\\d{1,3}){3})";
-    else if (_information == Orders::Information::PHONE_NUMBER)
+    else if (_information == Information::PHONE_NUMBER)
         rgx = "(\\d{1,3}(\\.\\d{1,3}){3})";
     std::smatch match;
 
