@@ -5,47 +5,78 @@
 // Login   <flavien.sellet@epitech.eu>
 //
 // Started on  Thu Apr 13 14:34:02 2017 sellet_f
-// Last update Mon Apr 17 18:50:05 2017 sellet_f
+// Last update Thu Apr 20 12:33:47 2017 sellet_f
 //
 
 #include "Orders.hpp"
 
-Orders		Orders::setInfos(std::string &token, Orders newOrder)
+int		Orders::setInfos(std::string &token, Information &info)
 {
   if (!token.compare("PHONE_NUMBER"))
-    newOrder.infos.push_back(Information::PHONE_NUMBER);
+    {
+      info = info == Information::UNDEFINED ? Information::PHONE_NUMBER : info;
+      return (1);
+    }
   else if (!token.compare("EMAIL_ADDRESS"))
-    newOrder.infos.push_back(Information::EMAIL_ADDRESS);
+    {
+      info = info == Information::UNDEFINED ? Information::EMAIL_ADDRESS : info;
+      return (1);
+    }
   else if (!token.compare("IP_ADDRESS"))
-    newOrder.infos.push_back(Information::IP_ADDRESS);
-  else
-    newOrder.files.push_back(token);
-  return (newOrder);
+    {
+      info = info == Information::UNDEFINED ? Information::IP_ADDRESS : info;
+      return (1);
+    }
+  return (0);
 }
 
-int		Orders::fillOrders(std::vector<Orders> &orders, std::string command)
+int						Orders::fillOrders(std::string command)
 {
-  Orders	newOrder;
-  std::string	token;
-  size_t	pos;
+  std::pair<std::string, Information>		newOrder;
+  std::string					token;
+  Information					info;
+  size_t					pos;
 
   pos = 0;
+  info = Information::UNDEFINED;
   while ((pos = command.find(" ")) != std::string::npos)
     {
+      newOrder = make_pair(std::string(""), Information::UNDEFINED);
       token = command.substr(0, pos);
-      newOrder = Orders::setInfos(token, newOrder);
+      if (Orders::setInfos(token, info) == 0)
+	{
+	  newOrder.first = token;
+	  _orders.push_back(newOrder);
+	}
       command.erase(0, pos + 1);
     }
+  newOrder = make_pair(std::string(""), Information::UNDEFINED);
   token = command.substr(0, pos);
-  newOrder = Orders::setInfos(token, newOrder);
-
-  if (newOrder.infos.size() == 0 || newOrder.files.size() == 0)
+  if (Orders::setInfos(token, info) == 0)
+    {
+      newOrder.first = token;
+      _orders.push_back(newOrder);
+    }
+  if (info == Information::UNDEFINED)
     return -1;
-  orders.push_back(newOrder);
+
+  for (auto & it : _orders)
+    if (it.second == Information::UNDEFINED)
+      it.second = info;
   return 0;
 }
 
-int		Orders::parseLine(std::vector<Orders> &orders, std::string commands)
+void		Orders::clear(void)
+{
+  _orders.clear();
+}
+
+std::vector<std::pair<std::string, Information>>	Orders::getOrders(void)
+{
+  return (_orders);
+}
+
+int		Orders::parseLine(std::string commands)
 {
   std::string	token;
   size_t	pos;
@@ -54,12 +85,14 @@ int		Orders::parseLine(std::vector<Orders> &orders, std::string commands)
   while ((pos = commands.find(";")) != std::string::npos)
     {
       token = commands.substr(0, pos);
-      Orders::fillOrders(orders, token);
+      Orders::fillOrders(token);
       commands.erase(0, pos +  2);
     }
   token = commands.substr(0, pos);
-  Orders::fillOrders(orders, token);
-  if (orders.size() == 0)
+  Orders::fillOrders(token);
+  for (auto & it : _orders)
+    std::cout << "File = " << it.first << "\nInfo = " << (int)it.second << std::endl;
+  if (_orders.size() == 0)
     return -1;
   return 0;
 }

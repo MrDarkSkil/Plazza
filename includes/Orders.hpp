@@ -5,7 +5,7 @@
 // Login   <flavien.sellet@epitech.eu>
 //
 // Started on  Thu Apr 13 02:08:15 2017 sellet_f
-// Last update Thu Apr 13 14:44:52 2017 sellet_f
+// Last update Thu Apr 20 12:32:18 2017 sellet_f
 //
 
 #ifndef     _ORDERS_HH_
@@ -14,23 +14,25 @@
 # include   <vector>
 # include   <iostream>
 
-class	Orders
-{
-public:
-  static Orders	setInfos(std::string &, Orders);
-  static int	fillOrders(std::vector<Orders> &, std::string);
-  static int	parseLine(std::vector<Orders> &, std::string);
-
-  enum class Information
+enum class Information
   {
     PHONE_NUMBER,
     EMAIL_ADDRESS,
-    IP_ADDRESS
+    IP_ADDRESS,
+    UNDEFINED
   };
 
+class	Orders
+{
+public:
+  int	setInfos(std::string &, Information &);
+  std::vector<std::pair<std::string, Information>>	getOrders(void);
+  int	fillOrders(std::string);
+  int	parseLine(std::string);
+  void	clear(void);
+
 private:
-  std::vector<std::string>	files;
-  std::vector<Information>	infos;
+  std::vector<std::pair<std::string, Information>>	_orders;
 };
 
 #endif

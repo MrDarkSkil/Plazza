@@ -15,17 +15,17 @@
 #include "CondVar.hpp"
 #include "SafeQueue.hpp"
 
-int         main(int argc, char const *argv[])
+int		main(int argc, char const *argv[])
 {
-  std::vector<Orders>	orders;
-  std::string		commands;
+  Orders	order;
+  std::string	commands;
 
   for (std::string line; std::getline(std::cin, line);)
     {
       std::cout << "line == " << line << std::endl;
-      if (Orders::parseLine(orders, line) == -1)
+      if (order.parseLine(line) == -1)
 	return -1;
-      orders.clear();
+      order.clear();
     }
 
   (void) argc;
