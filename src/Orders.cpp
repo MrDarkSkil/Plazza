@@ -9,6 +9,7 @@
 //
 
 #include "Orders.hpp"
+#include "Parser.hpp"
 
 int		Orders::setInfos(std::string &token, Information &info)
 {
@@ -80,6 +81,7 @@ int		Orders::parseLine(std::string &commands)
 {
   std::string	token;
   size_t	pos;
+  Parser    parser(" ", Information::UNDEFINED);
 
   while ((pos = commands.find(";")) != std::string::npos)
     {
@@ -90,7 +92,12 @@ int		Orders::parseLine(std::string &commands)
   token = commands.substr(0, pos);
   Orders::fillOrders(token);
   for (auto & it : _orders)
-    std::cout << "File = " << it.first << "\nInfo = " << (int)it.second << std::endl;
+  {
+      std::cout << "File = " << it.first << "\nInfo = " << (int)it.second << std::endl;
+      parser.setFile(it.first);
+      parser.setInformation((Information)it.second);
+      parser.parseFile();
+  }
   if (_orders.size() == 0)
     return -1;
   return 0;

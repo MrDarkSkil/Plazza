@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Wed Apr 19 12:32:15 2017 Leo Hubert Froideval
-** Last update Thu Apr 20 14:23:24 2017 gastal_r
+** Last update Thu Apr 20 16:49:54 2017 Leo Hubert Froideval
 */
 
 #include "Parser.hpp"
@@ -32,7 +32,7 @@ void Parser::parseFile()
     if (_information == Information::IP_ADDRESS)
         rgx = "(\\d{1,3}(\\.\\d{1,3}){3})";
     else if (_information == Information::EMAIL_ADDRESS)
-        rgx = "(\\d{1,3}(\\.\\d{1,3}){3})";
+        rgx = "(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+";
     else if (_information == Information::PHONE_NUMBER)
         rgx = "(\\d{1,3}(\\.\\d{1,3}){3})";
     std::smatch match;
@@ -51,6 +51,6 @@ void Parser::parseFile()
         afile.close();
     }
     else {
-        throw Exception("File " + _file + "not found.\n");
+        throw Exception("File " + _file + " not found.\n");
     }
 }
