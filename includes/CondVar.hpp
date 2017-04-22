@@ -5,13 +5,12 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Sat Apr 15 23:32:01 2017 gastal_r
-// Last update Mon Apr 17 11:59:17 2017 gastal_r
+// Last update Sat Apr 22 13:50:51 2017 gastal_r
 //
 
 #ifndef         _CONDVAR_HPP_
 #define         _CONDVAR_HPP_
 
-#include        <thread>
 #include        "ICondVar.hh"
 
 class CondVar : public ICondVar

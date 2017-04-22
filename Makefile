@@ -23,6 +23,7 @@ SRC             =       src/main.cpp		\
 			src/Process.cpp		\
 			src/Thread.cpp		\
 			src/Mutex.cpp		\
+			src/Plazza.cpp		\
 			src/Crypted.cpp
 
 OBJ             =       $(SRC:.cpp=.o)

@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Wed Apr 19 22:44:55 2017 gastal_r
-// Last update Wed Apr 19 22:47:35 2017 gastal_r
+// Last update Sat Apr 22 11:23:19 2017 gastal_r
 //
 
 #include      "Mutex.hpp"
@@ -32,7 +32,7 @@ void        Mutex::unlock(void)
 
 bool        Mutex::trylock(void)
 {
-  if (pthread_mutex_trylock(&_mutex) == -1)
-    return (false);
-  return (true);
+  if (pthread_mutex_trylock(&_mutex) == 0)
+    return (true);
+  return (false);
 }

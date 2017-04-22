@@ -25,7 +25,7 @@ public:
   Thread& operator=(Thread&& other) = default;
 
   void        waitThread(void);
-  void        startThread(void *(*func)(void *), void *arg);
+  void        startThread(void *(*func)(void *), void *);
 
   Status      getStatus(void);
 

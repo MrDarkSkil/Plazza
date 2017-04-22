@@ -5,30 +5,39 @@
 ** Login	gastal_r
 **
 ** Started on	Wed Apr 12 11:08:54 2017 gastal_r
-** Last update	Wed Apr 12 14:14:34 2017 gastal_r
+** Last update	Sat Apr 15 19:43:08 2017 gastal_r
 */
 
-#include "Orders.hpp"
-#include "Mutex.hpp"
-#include "ScopedLock.hpp"
-#include "Thread.hpp"
-#include "CondVar.hpp"
-#include "SafeQueue.hpp"
+#include    "Orders.hpp"
+#include    "Mutex.hpp"
+#include    "ScopedLock.hpp"
+#include    "Thread.hpp"
+#include    "CondVar.hpp"
+#include    "SafeQueue.hpp"
+#include    "Plazza.hpp"
 
-int		main(int argc, char const *argv[])
+int		main(int ac, char const *av[])
 {
-  Orders	order;
-  std::string	commands;
+  if (ac != 2)
+  {
+    std::cout << "Usage: " << av[0] << " [threads numbers per process]" << "\n";
+    return (0);
+  }
+  else if (std::stoi(av[1]) <= 0)
+  {
+    std::cout << "Thread number need to be positive" << "\n";
+    return (0);
+  }
 
+  Orders	order;
+  Plazza  plazza;
   for (std::string line; std::getline(std::cin, line);)
     {
-      std::cout << "line == " << line << std::endl;
-      if (order.parseLine(line) == -1)
-	return -1;
+      //std::cout << "line == " << line << std::endl;
       order.clear();
+      if (order.parseLine(line) == -1)
+	     return -1;
     }
-
-  (void) argc;
-  (void) argv;
-  return 0;
+  plazza.dividOrders(order.getOrders(), std::stoi(av[1]));
+  return (0);
 }
