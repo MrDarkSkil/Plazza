@@ -5,7 +5,7 @@
 // Login   <flavien.sellet@epitech.eu>
 //
 // Started on  Thu Apr 13 02:08:15 2017 sellet_f
-// Last update Thu Apr 20 14:22:01 2017 gastal_r
+// Last update Sat Apr 22 16:27:45 2017 gastal_r
 //
 
 #ifndef     _ORDERS_HH_
@@ -25,6 +25,8 @@ enum class Information
 class	Orders
 {
 public:
+  Orders() {};
+
   int	setInfos(std::string &, Information &);
   std::vector<std::pair<std::string, Information>>	&getOrders(void);
   int	fillOrders(std::string &);

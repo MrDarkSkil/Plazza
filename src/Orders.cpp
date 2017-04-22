@@ -5,7 +5,7 @@
 // Login   <flavien.sellet@epitech.eu>
 //
 // Started on  Thu Apr 13 14:34:02 2017 sellet_f
-// Last update Fri Apr 21 11:07:54 2017 gastal_r
+// Last update Sat Apr 22 21:31:47 2017 gastal_r
 //
 
 #include "Orders.hpp"
@@ -91,8 +91,6 @@ int		Orders::parseLine(std::string &commands)
     }
   token = commands.substr(0, pos);
   Orders::fillOrders(token);
-  for (auto & it : _orders)
-    std::cout << "File = " << it.first << "  Info = " << (int)it.second << std::endl;
   if (_orders.size() == 0)
     return -1;
   return 0;

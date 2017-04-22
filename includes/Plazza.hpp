@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu Apr 20 11:11:05 2017 gastal_r
-// Last update Sat Apr 22 11:12:53 2017 gastal_r
+// Last update Sat Apr 22 21:26:31 2017 gastal_r
 //
 
 #ifndef       _PLAZZA_HPP_
@@ -22,7 +22,8 @@ class         Plazza
 public:
   Plazza() {};
 
-  void        dividOrders(std::vector<std::pair<std::string, Information>> &, int);
+  void         dividOrders(std::vector<std::pair<std::string, Information>> &, int);
+  static void  *startParser(void *);
 
   ~Plazza() = default;
   Plazza(const Plazza& other) = default;

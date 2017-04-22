@@ -13,6 +13,8 @@
 
 #include      <thread>
 #include      <string>
+#include      <vector>
+#include      "Orders.hpp"
 
 class         IThread
 {
@@ -29,7 +31,7 @@ public:
 
   virtual Status  getStatus() = 0;
   virtual void    waitThread() = 0;
-  virtual void    startThread(void *(*)(void*), void *) = 0;
+  virtual void    startThread(void *(*)(void*), const std::pair<std::string, Information> &) = 0;
 };
 
 #endif        /* !_ITHREAD_HH_ */

@@ -45,7 +45,7 @@ void Parser::parseFile()
             std::string word;
             while(iss >> word) {
                 if (regex_match(word, rgx))
-                    std::cout << "match: " << word << '\n';
+                    std::cout << "match: " << word << std::endl;
             }
         }
         afile.close();

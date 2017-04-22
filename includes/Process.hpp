@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Wed Apr 19 16:48:04 2017 gastal_r
-// Last update Thu Apr 20 16:45:09 2017 gastal_r
+// Last update Sat Apr 22 21:25:31 2017 gastal_r
 //
 
 #ifndef       _PROCESS_HPP_
@@ -13,17 +13,18 @@
 
 #include      <chrono>
 #include      <thread>
-#include      <vector>
 #include      <sys/types.h>
 #include      <sys/wait.h>
 #include      <unistd.h>
 #include      "Orders.hpp"
 #include      "Thread.hpp"
 
+class         Thread;
+
 class         Process
 {
 public:
-  Process(const std::vector<std::pair<std::string, Information>>	&, int);
+  Process(const std::vector<std::pair<std::string, Information>> &, int);
 
   int      checkThreadSlot();
 

@@ -5,13 +5,21 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Wed Apr 19 22:05:15 2017 gastal_r
-// Last update Sat Apr 22 12:00:55 2017 gastal_r
+// Last update Sat Apr 22 21:04:50 2017 gastal_r
 //
 
 #include      "Thread.hpp"
 
-Thread::Thread (void) : _status(Status::NOT_STARTED)
-{};
+Thread::Data::Data(Mutex &mutex, Status &status) : _mutex(mutex), _status(status)
+{}
+
+void      Thread::Data::setOrders(const std::pair<std::string, Information> &orders)
+{
+  _orders = orders;
+}
+
+Thread::Thread (void) : _mutex(), _status(Status::NOT_STARTED), _data(_mutex, _status)
+{}
 
 Thread::~Thread()
 {
@@ -24,18 +32,29 @@ void        Thread::waitThread(void)
   pthread_join(_thread, nullptr);
 }
 
-void      Thread::startThread(void *(*func)(void *), void *arg)
+void      Thread::startThread(void *(*func)(void *), const std::pair<std::string, Information> &orders)
 {
-  _mutex.trylock();
-  pthread_create(&_thread, nullptr, func, &_status);
-  _status = Thread::Status::RUNNING;
+  _data.setOrders(orders);
+  if (_mutex.trylock() == true)
+  {
+    if (pthread_create(&_thread, nullptr, func, &_data) != 0)
+    {
+      std::cerr << "Thread creation error" << std::endl;
+      _mutex.unlock();
+    }
+    else
+      _status = Thread::Status::RUNNING;
+  }
+  else
+    std::cerr << "ERROR LOCKING THREAD"  <<  '\n';
 }
-#include <iostream>
+
 Thread::Status      Thread::getStatus(void)
 {
   if (_mutex.trylock() != false)
   {
     _status = Thread::Status::NOT_STARTED;
+    _mutex.unlock();
   }
   return (_status);
 }

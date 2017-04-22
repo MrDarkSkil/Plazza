@@ -11,11 +11,31 @@
 #ifndef       _THREAD_HPP_
 #define       _THREAD_HPP_
 
+#include      <iostream>
 #include      "IThread.hh"
 #include      "Mutex.hpp"
+#include      "Plazza.hpp"
 
 class         Thread : public IThread
 {
+public:
+  class       Data
+  {
+  public:
+    Data(Mutex &, Status &);
+
+    void    setOrders(const std::pair<std::string, Information> &orders);
+
+    Status  &getStatus(void) { return (_status); }
+    Mutex   &getMutex(void)  { return (_mutex); }
+    const std::pair<std::string, Information> &getOrders(void) { return (_orders); }
+
+  private:
+    Mutex     &_mutex;
+    Status    &_status;
+    std::pair<std::string, Information>  _orders;
+};
+
 public:
   explicit Thread (void);
   ~Thread();
@@ -25,13 +45,14 @@ public:
   Thread& operator=(Thread&& other) = default;
 
   void        waitThread(void);
-  void        startThread(void *(*func)(void *), void *);
+  void        startThread(void *(*func)(void *), const std::pair<std::string, Information> &);
 
   Status      getStatus(void);
 
 private:
   Mutex       _mutex;
   Status      _status;
+  Data        _data;
   pthread_t   _thread;
 };
 
