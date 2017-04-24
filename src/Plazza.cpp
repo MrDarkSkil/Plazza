@@ -9,11 +9,19 @@
 //
 
 #include      "Plazza.hpp"
+#include      "Parser.hpp"
 
 void          *Plazza::startParser(void *status)
 {
+    Parser  parser("",(Information)1);
   Thread::Data *data = (Thread::Data *) status;
   std::cout << "ENTER THREAD" << "\n";
+
+  parser.setFile(data->getOrders().first);
+  parser.setInformation((Information)data->getOrders().second);
+  parser.parseFile();
+
+
   //std::cout << data->getOrders().first << '\n';
   std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
