@@ -1,0 +1,97 @@
+//
+// orders.cpp for Project-Master in /home/sellet_f/Projets/Tek2/Plazza
+//
+// Made by sellet_f
+// Login   <flavien.sellet@epitech.eu>
+//
+// Started on  Thu Apr 13 14:34:02 2017 sellet_f
+// Last update Sat Apr 22 21:31:47 2017 gastal_r
+//
+
+#include "Orders.hpp"
+#include "Parser.hpp"
+
+int		Orders::setInfos(std::string &token, Information &info)
+{
+  if (!token.compare("PHONE_NUMBER"))
+    {
+      info = info == Information::UNDEFINED ? Information::PHONE_NUMBER : info;
+      return (1);
+    }
+  else if (!token.compare("EMAIL_ADDRESS"))
+    {
+      info = info == Information::UNDEFINED ? Information::EMAIL_ADDRESS : info;
+      return (1);
+    }
+  else if (!token.compare("IP_ADDRESS"))
+    {
+      info = info == Information::UNDEFINED ? Information::IP_ADDRESS : info;
+      return (1);
+    }
+  return (0);
+}
+
+int						Orders::fillOrders(std::string &command)
+{
+  std::pair<std::string, Information>		newOrder;
+  std::string					token;
+  Information					info;
+  size_t					pos;
+
+  pos = 0;
+  info = Information::UNDEFINED;
+  while ((pos = command.find(" ")) != std::string::npos)
+    {
+      newOrder = make_pair(std::string(""), Information::UNDEFINED);
+      token = command.substr(0, pos);
+      if (Orders::setInfos(token, info) == 0)
+	{
+	  newOrder.first = token;
+	  _orders.push_back(newOrder);
+	}
+      command.erase(0, pos + 1);
+    }
+  newOrder = make_pair(std::string(""), Information::UNDEFINED);
+  token = command.substr(0, pos);
+  if (Orders::setInfos(token, info) == 0)
+    {
+      newOrder.first = token;
+      _orders.push_back(newOrder);
+    }
+  if (info == Information::UNDEFINED)
+    return -1;
+
+  for (auto & it : _orders)
+    if (it.second == Information::UNDEFINED)
+      it.second = info;
+  return 0;
+}
+
+void		Orders::clear(void)
+{
+  _orders.clear();
+}
+
+std::vector<std::pair<std::string, Information>>	&Orders::getOrders(void)
+{
+  return (_orders);
+}
+
+int		Orders::parseLine(std::string &commands)
+{
+  std::string	token;
+  size_t	pos;
+  Parser    parser(" ", Information::UNDEFINED);
+
+  while ((pos = commands.find(";")) != std::string::npos)
+    {
+      token = commands.substr(0, pos);
+      Orders::fillOrders(token);
+      commands.erase(0, pos +  2);
+    }
+  token = commands.substr(0, pos);
+  Orders::fillOrders(token);
+  if (_orders.size() == 0)
+    return -1;
+  return 0;
+}
