@@ -5,7 +5,7 @@
 // Login   <flavien.sellet@epitech.eu>
 //
 // Started on  Thu Apr 13 02:08:15 2017 sellet_f
-// Last update Sat Apr 22 16:27:45 2017 gastal_r
+// Last update Mon Apr 24 14:41:51 2017 sellet_f
 //
 
 #ifndef     _ORDERS_HH_
@@ -31,6 +31,7 @@ public:
   std::vector<std::pair<std::string, Information>>	&getOrders(void);
   int	fillOrders(std::string &);
   int	parseLine(std::string &);
+  void	epur(std::string &);
   void	clear(void);
 
 private:

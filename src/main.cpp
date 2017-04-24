@@ -30,14 +30,15 @@ int		main(int ac, char const *av[])
   }
 
   Orders	order;
-  Plazza  plazza;
+  Plazza	plazza;
   for (std::string line; std::getline(std::cin, line);)
     {
-      //std::cout << "line == " << line << std::endl;
       order.clear();
-      if (order.parseLine(line) == -1)
-	     return -1;
+      order.epur(line);
+      if (line != "")
+	if (order.parseLine(line) == -1)
+	  return -1;
+      plazza.dividOrders(order.getOrders(), std::stoi(av[1]));
     }
-  plazza.dividOrders(order.getOrders(), std::stoi(av[1]));
   return (0);
 }
