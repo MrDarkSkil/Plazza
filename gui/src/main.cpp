@@ -33,17 +33,17 @@ int		main(int ac, char *av[])
   QApplication app(ac, av);
 
   MainWindow win;
+  Orders	order;
+  Plazza  plazza;
 
   win.show();
-Orders	order;
-  Plazza  plazza;
-  for (std::string line; std::getline(std::cin, line);)
+/*  for (std::string line; std::getline(std::cin, line);)
     {
       //std::cout << "line == " << line << std::endl;
       order.clear();
       if (order.parseLine(line) == -1)
 	     return -1;
     }
-  plazza.dividOrders(order.getOrders(), std::stoi(av[1]));
+  plazza.dividOrders(order.getOrders(), std::stoi(av[1])); */
   return (app.exec());
 }

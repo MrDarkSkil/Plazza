@@ -5,11 +5,30 @@
 // Login   <flavien.sellet@epitech.eu>
 //
 // Started on  Thu Apr 13 14:34:02 2017 sellet_f
-// Last update Sat Apr 22 21:31:47 2017 gastal_r
+// Last update Mon Apr 24 14:53:36 2017 sellet_f
 //
 
 #include "Orders.hpp"
 #include "Parser.hpp"
+
+void		Orders::epur(std::string &str)
+{
+  bool		space;
+  auto		beg = str.begin();
+
+  space = false;
+  for (auto ch : str)
+    if (std::isspace(ch))
+      space = beg != str.begin();
+    else
+      {
+	if (space)
+	  *beg++ = ' ';
+	*beg++ = ch;
+	space = false;
+      }
+  str.erase(beg, str.end());
+}
 
 int		Orders::setInfos(std::string &token, Information &info)
 {
@@ -86,11 +105,13 @@ int		Orders::parseLine(std::string &commands)
   while ((pos = commands.find(";")) != std::string::npos)
     {
       token = commands.substr(0, pos);
-      Orders::fillOrders(token);
+      if (token != "")
+	Orders::fillOrders(token);
       commands.erase(0, pos +  2);
     }
   token = commands.substr(0, pos);
-  Orders::fillOrders(token);
+  if (token != "")
+    Orders::fillOrders(token);
   if (_orders.size() == 0)
     return -1;
   return 0;

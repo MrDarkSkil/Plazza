@@ -52,6 +52,7 @@ SOURCES       = src/Crypted.cpp \
 		src/main.cpp \
 		src/MainWindow.cpp \
 		src/Mutex.cpp \
+		src/NamedPipe.cpp \
 		src/Orders.cpp \
 		src/Parser.cpp \
 		src/Plazza.cpp \
@@ -62,6 +63,7 @@ OBJECTS       = Crypted.o \
 		main.o \
 		MainWindow.o \
 		Mutex.o \
+		NamedPipe.o \
 		Orders.o \
 		Parser.o \
 		Plazza.o \
@@ -254,7 +256,6 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		/usr/lib/qt/mkspecs/features/qt_config.prf \
 		/usr/lib/qt/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/qt/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/qt/mkspecs/features/toolchain.prf \
 		/usr/lib/qt/mkspecs/features/default_pre.prf \
@@ -294,6 +295,7 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		src/main.cpp \
 		src/MainWindow.cpp \
 		src/Mutex.cpp \
+		src/NamedPipe.cpp \
 		src/Orders.cpp \
 		src/Parser.cpp \
 		src/Plazza.cpp \
@@ -496,7 +498,6 @@ Makefile: gui.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/mkspecs/f
 		/usr/lib/qt/mkspecs/features/qt_config.prf \
 		/usr/lib/qt/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/qt/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		/usr/lib/qt/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/qt/mkspecs/features/toolchain.prf \
 		/usr/lib/qt/mkspecs/features/default_pre.prf \
@@ -705,7 +706,6 @@ Makefile: gui.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/mkspecs/f
 /usr/lib/qt/mkspecs/features/qt_config.prf:
 /usr/lib/qt/mkspecs/linux-g++/qmake.conf:
 /usr/lib/qt/mkspecs/features/spec_post.prf:
-.qmake.stash:
 /usr/lib/qt/mkspecs/features/exclusive_builds.prf:
 /usr/lib/qt/mkspecs/features/toolchain.prf:
 /usr/lib/qt/mkspecs/features/default_pre.prf:
@@ -744,7 +744,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/qt/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ui_mainwindow.h includes/CondVar.hpp includes/Crypted.hpp includes/Exception.hpp includes/ICondVar.hh includes/IMutex.hh includes/ISafeQueue.hh includes/IThread.hh includes/MainWindow.hpp includes/Mutex.hpp includes/NamedPipe.hpp includes/Orders.hpp includes/Parser.hpp includes/Plazza.hpp includes/Process.hpp includes/SafeQueue.hpp includes/ScopedLock.hpp includes/Thread.hpp $(DISTDIR)/
-	$(COPY_FILE) --parents src/Crypted.cpp src/main.cpp src/MainWindow.cpp src/Mutex.cpp src/Orders.cpp src/Parser.cpp src/Plazza.cpp src/Process.cpp src/SafeQueue.cpp src/Thread.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents src/Crypted.cpp src/main.cpp src/MainWindow.cpp src/Mutex.cpp src/NamedPipe.cpp src/Orders.cpp src/Parser.cpp src/Plazza.cpp src/Process.cpp src/SafeQueue.cpp src/Thread.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents includes/mainwindow.ui $(DISTDIR)/
 
 
@@ -816,6 +816,9 @@ MainWindow.o: src/MainWindow.cpp
 
 Mutex.o: src/Mutex.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Mutex.o src/Mutex.cpp
+
+NamedPipe.o: src/NamedPipe.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o NamedPipe.o src/NamedPipe.cpp
 
 Orders.o: src/Orders.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Orders.o src/Orders.cpp

@@ -5,15 +5,23 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu Apr 20 11:10:38 2017 gastal_r
-// Last update Sat Apr 22 21:31:18 2017 gastal_r
+// Last update Mon Apr 24 14:03:51 2017 sellet_f
 //
 
 #include      "Plazza.hpp"
+#include      "Parser.hpp"
 
 void          *Plazza::startParser(void *status)
 {
+    Parser  parser("",(Information)1);
   Thread::Data *data = (Thread::Data *) status;
   std::cout << "ENTER THREAD" << "\n";
+
+  parser.setFile(data->getOrders().first);
+  parser.setInformation((Information)data->getOrders().second);
+  parser.parseFile();
+
+
   //std::cout << data->getOrders().first << '\n';
   std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
