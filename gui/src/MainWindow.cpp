@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Mon Apr 24 15:18:54 2017 gastal_r
-// Last update Tue Apr 25 12:31:04 2017 gastal_r
+// Last update Tue Apr 25 15:20:51 2017 sellet_f
 //
 
 #include      <QtGui>
@@ -28,7 +28,9 @@ void MainWindow::listView()
 {
   for(int i = 0; i < 50; i++)
   {
-    listWidget->addItem("Item " + QString::number(i));
+    QListWidgetItem	*listItem = new QListWidgetItem(listWidget);
+    listItem->setIcon(QIcon("res/RedButton.png"));
+    listItem->setText("Item " + QString::number(i));
+    listWidget->addItem(listItem);
   }
-  listWidget->item(10)->setText("JE SUCE DES ENORMES CHIBRES");
 }
