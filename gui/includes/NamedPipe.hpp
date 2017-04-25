@@ -5,16 +5,18 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Mon Apr 17 15:42:43 2017 gastal_r
-// Last update Tue Apr 25 12:37:50 2017 gastal_r
+// Last update Tue Apr 25 12:46:44 2017 gastal_r
 //
 
 #ifndef       _NAMEDPIPE_HPP_
 #define       _NAMEDPIPE_HPP_
 
+#include      <string>
+
 class         NamedPipe
 {
 public:
-  NamedPipe(std::string);
+  explicit NamedPipe(std::string);
   ~NamedPipe();
   NamedPipe(const NamedPipe& other) = default;
   NamedPipe(NamedPipe&& other) = default;
