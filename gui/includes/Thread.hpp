@@ -37,23 +37,23 @@ public:
 };
 
 public:
-  explicit Thread (void);
+  explicit Thread ();
   ~Thread();
-  Thread(const Thread& other) = default;
-  Thread(Thread&& other) = default;
-  Thread& operator=(const Thread& other) = default;
-  Thread& operator=(Thread&& other) = default;
-
+  
   void        waitThread(void);
   void        startThread(void *(*func)(void *), const std::pair<std::string, Information> &);
 
+  void        setProcessId(size_t id) { _processId = id; }
+
   Status      getStatus(void);
+  size_t      getProcessId() const { return (_processId); }
 
 private:
   Mutex       _mutex;
   Status      _status;
   Data        _data;
   pthread_t   _thread;
+  size_t      _processId;
 };
 
 #endif        /* !_THREAD_HPP_ */

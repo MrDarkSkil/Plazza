@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Wed Apr 19 16:50:43 2017 gastal_r
-// Last update Wed Apr 26 03:12:13 2017 gastal_r
+// Last update Wed Apr 26 17:11:34 2017 gastal_r
 //
 
 #include        "Process.hpp"
@@ -14,6 +14,8 @@ Process::Process(const std::vector<std::pair<std::string, Information>> &orders,
    _orders(orders), _namedPipe(std::to_string(id)), _nbThreads(nbThreads)
 {
   _thread.resize(nbThreads);
+  for (auto & it : _thread)
+    it.setProcessId(id);
 }
 
 Process::~Process()
@@ -25,7 +27,6 @@ int          Process::checkThreadSlot()
 {
   for (int i = 0; i < _nbThreads; ++i)
   {
-    //std::cerr << "Thread [" << i << "] status: " << (int) _thread.at(i).getStatus() << std::endl;
     if (_thread.at(i).getStatus() == Thread::Status::NOT_STARTED
         || _thread.at(i).getStatus() == Thread::Status::DEAD)
       return (i);
@@ -39,11 +40,7 @@ void            Process::refreshGui()
   NamedPipe::Data data;
 
   for (int i = 0; i < _nbThreads; ++i)
-  {
-    //std::cerr << "Thread [" << i << "] status: " << (int) _thread.at(i).getStatus() << std::endl;
-    //std::cout << "!!!! " << (int) _thread.at(i).getStatus() << std::endl;
     v.push_back(_thread.at(i).getStatus());
-  }
   data.setStatus(v);
   data.setOrders(_orders);
   _namedPipe.writeContent(data);
@@ -96,8 +93,6 @@ void            Process::start()
     data.setDeath(true);
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
    _namedPipe.writeContent(data);
-/*    for (auto & it : _thread)
-      it.waitThread(); */
     std::cout << "EXIT PROCESS" << std::endl;
     exit(0);
   }
