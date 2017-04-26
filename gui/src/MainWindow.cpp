@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Mon Apr 24 15:18:54 2017 gastal_r
-// Last update Wed Apr 26 20:14:16 2017 gastal_r
+// Last update Wed Apr 26 21:05:11 2017 gastal_r
 //
 
 #include      "MainWindow.hpp"
@@ -41,7 +41,7 @@ void MainWindow::refreshList(const std::vector<NamedPipe::Data> &data)
         listItem->setIcon(QIcon("res/RedButton.png"));
       else
         listItem->setIcon(QIcon("res/GreenButton.png"));
-      listItem->setText("File: " + (it.getOrders().size() > it.getStatus().size()
+      listItem->setText("File: " + (i < it.getOrders().size()
         ? QString(it.getOrders().at(i).first.c_str())
         + "\tInstruction: " +
         (it.getOrders().at(i).second == Information::EMAIL_ADDRESS ? "EMAIL_ADDRESS" :
