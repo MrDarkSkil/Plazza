@@ -45,8 +45,8 @@ int		main(int ac, char *av[])
       order.clear();
       if (order.parseLine(line) == -1)
 	     return -1;
+       plazza.dividOrders(order.getOrders(), std::stoi(av[1]), win);
     }
-  plazza.dividOrders(order.getOrders(), std::stoi(av[1]), win);
 
   while (1)
   {

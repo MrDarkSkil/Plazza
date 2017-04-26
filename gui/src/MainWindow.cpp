@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Mon Apr 24 15:18:54 2017 gastal_r
-// Last update Wed Apr 26 01:59:05 2017 gastal_r
+// Last update Wed Apr 26 13:48:43 2017 gastal_r
 //
 
 #include      "MainWindow.hpp"
@@ -27,12 +27,19 @@ void MainWindow::refreshList(const std::vector<NamedPipe::Data> &data)
   while (listWidget->count() > 0)
     listWidget->takeItem(0);
 
+  size_t nbProc = 0;
   for (auto & it : data)
   {
+    QListWidgetItem *listItem =  new QListWidgetItem(listWidget);
+    listItem->setText("PROCESS N°" + QString::number(nbProc));
+    listWidget->addItem(listItem);
     for (size_t i = 0; i < it.getStatus().size(); ++i)
     {
       QListWidgetItem *listItem =  new QListWidgetItem(listWidget);
-      //listItem->setIcon(QIcon("res/RedButton.png"));
+      if (it.getStatus().at(i) == IThread::Status::RUNNING)
+        listItem->setIcon(QIcon("res/RedButton.png"));
+      else
+        listItem->setIcon(QIcon("res/GreenButton.png"));
       listItem->setText("File: " + QString(it.getOrders().at(i).first.c_str())
         + "\tInstruction: " +
         (it.getOrders().at(i).second == Information::EMAIL_ADDRESS ? "EMAIL_ADDRESS" :
@@ -42,5 +49,6 @@ void MainWindow::refreshList(const std::vector<NamedPipe::Data> &data)
           (it.getStatus().at(i) == IThread::Status::RUNNING ? "RUNNING" : "DEAD")));
       listWidget->addItem(listItem);
     }
+    ++nbProc;
   }
 }

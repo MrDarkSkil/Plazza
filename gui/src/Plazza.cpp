@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu Apr 20 11:10:38 2017 gastal_r
-// Last update Wed Apr 26 03:10:25 2017 gastal_r
+// Last update Wed Apr 26 13:30:14 2017 gastal_r
 //
 
 #include      "Plazza.hpp"
@@ -57,6 +57,7 @@ void          Plazza::dividOrders(std::vector<std::pair<std::string, Information
     process.start();
 
 
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     std::vector<NamedPipe::Data>  data;
     data.clear();
     for (size_t i = 0; i < _process.size(); ++i)
