@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu Apr 20 11:11:05 2017 gastal_r
-// Last update Sat Apr 22 21:26:31 2017 gastal_r
+// Last update Wed Apr 26 02:22:40 2017 gastal_r
 //
 
 #ifndef       _PLAZZA_HPP_
@@ -16,20 +16,21 @@
 #include      <chrono>
 #include      "Orders.hpp"
 #include      "Process.hpp"
+#include      "NamedPipe.hpp"
+#include      "MainWindow.hpp"
 
 class         Plazza
 {
 public:
-  Plazza() {};
+  Plazza();
 
-  void         dividOrders(std::vector<std::pair<std::string, Information>> &, int);
+  void         dividOrders(std::vector<std::pair<std::string, Information>> &, int, MainWindow &);
   static void  *startParser(void *);
 
-  ~Plazza() = default;
-  Plazza(const Plazza& other) = default;
-  Plazza(Plazza&& other) = default;
-  Plazza& operator=(const Plazza& other) = default;
-  Plazza& operator=(Plazza&& other) = default;
+  std::vector<size_t> &getProcess() { return (_process); }
+
+private:
+  std::vector<size_t>  _process;
 };
 
 #endif /* !_PLAZZA_HPP_ */

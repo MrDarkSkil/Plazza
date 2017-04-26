@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Wed Apr 19 22:05:15 2017 gastal_r
-// Last update Sat Apr 22 21:04:50 2017 gastal_r
+// Last update Wed Apr 26 02:54:31 2017 gastal_r
 //
 
 #include      "Thread.hpp"
@@ -51,7 +51,7 @@ void      Thread::startThread(void *(*func)(void *), const std::pair<std::string
 
 Thread::Status      Thread::getStatus(void)
 {
-  if (_mutex.trylock() != false)
+  if (_status != Thread::Status::DEAD && _mutex.trylock() != false)
   {
     _status = Thread::Status::NOT_STARTED;
     _mutex.unlock();

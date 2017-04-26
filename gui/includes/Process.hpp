@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Wed Apr 19 16:48:04 2017 gastal_r
-// Last update Sat Apr 22 21:25:31 2017 gastal_r
+// Last update Wed Apr 26 01:32:33 2017 gastal_r
 //
 
 #ifndef       _PROCESS_HPP_
@@ -18,21 +18,31 @@
 #include      <unistd.h>
 #include      "Orders.hpp"
 #include      "Thread.hpp"
+#include      "NamedPipe.hpp"
 
 class         Thread;
 
 class         Process
 {
 public:
-  Process(const std::vector<std::pair<std::string, Information>> &, int);
+  Process(const std::vector<std::pair<std::string, Information>> &, int, size_t);
+
+  virtual ~Process();
+  Process(const Process& other) = default;
+  Process(Process&& other) = default;
+  Process& operator=(const Process& other) = default;
+  Process& operator=(Process&& other) = default;
 
   int      checkThreadSlot();
+  void     refreshGui();
+  bool     checkDead();
 
   void        start();
 
 private:
   std::vector<std::pair<std::string, Information>>   _orders;
   std::vector<Thread>   _thread;
+  NamedPipe             _namedPipe;
   int                   _nbThreads;
 };
 

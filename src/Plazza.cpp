@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu Apr 20 11:10:38 2017 gastal_r
-// Last update Mon Apr 24 14:03:51 2017 sellet_f
+// Last update Wed Apr 26 02:11:22 2017 gastal_r
 //
 
 #include      "Plazza.hpp"
@@ -21,11 +21,6 @@ void          *Plazza::startParser(void *status)
   parser.setInformation((Information)data->getOrders().second);
   parser.parseFile();
 
-
-  //std::cout << data->getOrders().first << '\n';
-  std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-
-  //Toujours laisser ça a la fin
   data->getMutex().unlock();
   data->getStatus() = Thread::Status::DEAD;
   return (nullptr);
