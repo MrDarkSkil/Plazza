@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Wed Apr 19 16:48:04 2017 gastal_r
-// Last update Wed Apr 26 01:32:33 2017 gastal_r
+// Last update Thu Apr 27 13:43:55 2017 gastal_r
 //
 
 #ifndef       _PROCESS_HPP_
@@ -44,6 +44,7 @@ private:
   std::vector<Thread>   _thread;
   NamedPipe             _namedPipe;
   int                   _nbThreads;
+  size_t                _processId;
 };
 
 #endif /* end of include guard: _PROCESS_HPP_ */

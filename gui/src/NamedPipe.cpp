@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Tue Apr 25 12:24:55 2017 gastal_r
-// Last update Wed Apr 26 02:31:27 2017 gastal_r
+// Last update Thu Apr 27 13:57:24 2017 gastal_r
 //
 
 #include        "NamedPipe.hpp"
@@ -13,6 +13,8 @@
 std::ostream& operator<<(std::ostream &os, const NamedPipe::Data& obj)
 {
   os << obj.getDeath();
+  os << " ";
+  os << obj.getProcessId();
   os << " ";
   if (obj.getDeath())
     return (os);
@@ -45,6 +47,9 @@ std::istream& operator>>(std::istream &os, NamedPipe::Data& obj)
   bool dead = false;
   os >> dead;
   obj.setDeath(dead);
+  size_t processId;
+  os >> processId;
+  obj.setProcessId(processId);
   if (dead)
     return (os);
   os >> length;
@@ -77,9 +82,6 @@ NamedPipe::NamedPipe(const std::string &name) : _name(name), _filename("/tmp/pla
   if (!testFile(_filename))
     mkfifo(_filename.c_str(), 0666);
 }
-
-NamedPipe::~NamedPipe()
-{}
 
 bool		NamedPipe::readContent(NamedPipe::Data &data) const
 {

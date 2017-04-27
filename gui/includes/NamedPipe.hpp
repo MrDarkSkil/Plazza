@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Mon Apr 17 15:42:43 2017 gastal_r
-// Last update Tue Apr 25 22:37:39 2017 gastal_r
+// Last update Thu Apr 27 13:34:38 2017 gastal_r
 //
 
 #ifndef       _NAMEDPIPE_HPP_
@@ -25,15 +25,17 @@ public:
   class       Data
   {
   public:
-    Data() : _dead(false) {};
+    Data() : _dead(false), _processId(0) {};
 
     void setOrders(const std::vector<std::pair<std::string, Information>> &orders) { _orders = orders; }
     void setStatus(const std::vector<IThread::Status> &status) { _status = status; }
-    void setDeath(bool val) { _dead = val; }
+    void setDeath(bool val)       { _dead = val; }
+    void setProcessId(size_t id)  { _processId = id; }
 
     std::vector<std::pair<std::string, Information>> getOrders(void) const { return (_orders); }
     std::vector<IThread::Status> getStatus(void) const { return (_status); }
-    bool  getDeath() const { return (_dead); }
+    bool   getDeath() const { return (_dead); }
+    size_t getProcessId() const { return (_processId); }
 
     friend std::ostream& operator<<(std::ostream &os, const Data& o);
     friend std::istream& operator>>(std::istream &os, Data& o);
@@ -41,16 +43,12 @@ public:
   private:
     std::vector<std::pair<std::string, Information>> _orders;
     std::vector<IThread::Status> _status;
-    bool _dead;
+    bool    _dead;
+    size_t	_processId;
   };
 
 public:
   explicit NamedPipe(const std::string &);
-  ~NamedPipe();
-  NamedPipe(const NamedPipe& other) = default;
-  NamedPipe(NamedPipe&& other) = default;
-  NamedPipe& operator=(const NamedPipe& other) = default;
-  NamedPipe& operator=(NamedPipe&& other) = default;
 
   bool		readContent(NamedPipe::Data &) const;
   bool		writeContent(const NamedPipe::Data &) const;
@@ -59,8 +57,6 @@ public:
 private:
   std::string _name;
   std::string	_filename;
-  int		_fd;
-
 };
 
 #endif /* !_NAMEDPIPE_HPP_ */

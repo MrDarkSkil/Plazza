@@ -7,7 +7,7 @@
 ** Started on	Wed Apr 12 11:08:54 2017 gastal_r
 ** Last update	Sat Apr 15 19:43:08 2017 gastal_r
 */
-#include <QApplication>
+
 #include    "Orders.hpp"
 #include    "Mutex.hpp"
 #include    "ScopedLock.hpp"
@@ -34,7 +34,6 @@ int		main(int ac, char *av[])
   QApplication app(ac, av);
 
   MainWindow win;
-  std::cout << "test" << std::endl;
   Orders	order;
   Plazza  plazza;
 

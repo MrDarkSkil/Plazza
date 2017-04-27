@@ -5,17 +5,15 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Wed Apr 19 16:50:43 2017 gastal_r
-// Last update Wed Apr 26 17:11:34 2017 gastal_r
+// Last update Thu Apr 27 13:53:08 2017 gastal_r
 //
 
 #include        "Process.hpp"
 
 Process::Process(const std::vector<std::pair<std::string, Information>> &orders, int nbThreads, size_t id) :
-   _orders(orders), _namedPipe(std::to_string(id)), _nbThreads(nbThreads)
+   _orders(orders), _namedPipe(std::to_string(id)), _nbThreads(nbThreads), _processId(id)
 {
   _thread.resize(nbThreads);
-  for (auto & it : _thread)
-    it.setProcessId(id);
 }
 
 Process::~Process()
@@ -39,6 +37,7 @@ void            Process::refreshGui()
   std::vector<Thread::Status> v;
   NamedPipe::Data data;
 
+  data.setProcessId(_processId);
   for (int i = 0; i < _nbThreads; ++i)
     v.push_back(_thread.at(i).getStatus());
   data.setStatus(v);
@@ -73,7 +72,6 @@ void            Process::start()
   pid_t pid = fork();
   if (pid == 0)
   {
-     std::cout << "NEW PROCESS" << std::endl;
     for (const auto & it : _orders)
     {
       int pos;
@@ -91,13 +89,13 @@ void            Process::start()
     NamedPipe::Data data;
 
     data.setDeath(true);
+    data.setProcessId(_processId);
     std::this_thread::sleep_for(std::chrono::milliseconds(500));
    _namedPipe.writeContent(data);
-    std::cout << "EXIT PROCESS" << std::endl;
     exit(0);
   }
   else if (pid < 0)
   {
-    std::cout << "Fork failed" << "\n";
+    std::cerr << "Fork failed" << "\n";
   }
 }
