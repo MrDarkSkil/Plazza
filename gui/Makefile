@@ -36,9 +36,9 @@ DISTNAME      = gui1.0.0
 DISTDIR = /home/gastal_r/rendu/Plazza/gui/.tmp/gui1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-O1,--sort-common,--as-needed,-z,relro
-LIBS          = $(SUBLIBS) -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread
 AR            = ar cqs
-RANLIB        = 
+RANLIB        =
 SED           = sed
 STRIP         = strip
 
@@ -57,7 +57,6 @@ SOURCES       = src/Crypted.cpp \
 		src/Parser.cpp \
 		src/Plazza.cpp \
 		src/Process.cpp \
-		src/SafeQueue.cpp \
 		src/Thread.cpp moc_MainWindow.cpp
 OBJECTS       = Crypted.o \
 		main.o \
@@ -68,7 +67,6 @@ OBJECTS       = Crypted.o \
 		Parser.o \
 		Plazza.o \
 		Process.o \
-		SafeQueue.o \
 		Thread.o \
 		moc_MainWindow.o
 DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
@@ -280,7 +278,6 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		includes/Exception.hpp \
 		includes/ICondVar.hh \
 		includes/IMutex.hh \
-		includes/ISafeQueue.hh \
 		includes/IThread.hh \
 		includes/MainWindow.hpp \
 		includes/Mutex.hpp \
@@ -300,17 +297,16 @@ DIST          = /usr/lib/qt/mkspecs/features/spec_pre.prf \
 		src/Parser.cpp \
 		src/Plazza.cpp \
 		src/Process.cpp \
-		src/SafeQueue.cpp \
 		src/Thread.cpp
 QMAKE_TARGET  = gui
-DESTDIR       = 
+DESTDIR       =
 TARGET        = gui
 
 
 first: all
 ####### Build rules
 
-$(TARGET): ui_mainwindow.h $(OBJECTS)  
+$(TARGET): ui_mainwindow.h $(OBJECTS)
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
 Makefile: gui.pro /usr/lib/qt/mkspecs/linux-g++/qmake.conf /usr/lib/qt/mkspecs/features/spec_pre.prf \
@@ -748,13 +744,13 @@ distdir: FORCE
 	$(COPY_FILE) --parents includes/mainwindow.ui $(DISTDIR)/
 
 
-clean: compiler_clean 
+clean: compiler_clean
 	-$(DEL_FILE) $(OBJECTS)
 	-$(DEL_FILE) *~ core *.core
 
 
-distclean: clean 
-	-$(DEL_FILE) $(TARGET) 
+distclean: clean
+	-$(DEL_FILE) $(TARGET)
 	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
@@ -801,44 +797,44 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean
 
 ####### Compile
 
-Crypted.o: src/Crypted.cpp 
+Crypted.o: src/Crypted.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Crypted.o src/Crypted.cpp
 
-main.o: src/main.cpp 
+main.o: src/main.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o src/main.cpp
 
-MainWindow.o: src/MainWindow.cpp 
+MainWindow.o: src/MainWindow.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MainWindow.o src/MainWindow.cpp
 
-Mutex.o: src/Mutex.cpp 
+Mutex.o: src/Mutex.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Mutex.o src/Mutex.cpp
 
-NamedPipe.o: src/NamedPipe.cpp 
+NamedPipe.o: src/NamedPipe.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o NamedPipe.o src/NamedPipe.cpp
 
-Orders.o: src/Orders.cpp 
+Orders.o: src/Orders.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Orders.o src/Orders.cpp
 
-Parser.o: src/Parser.cpp 
+Parser.o: src/Parser.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Parser.o src/Parser.cpp
 
-Plazza.o: src/Plazza.cpp 
+Plazza.o: src/Plazza.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Plazza.o src/Plazza.cpp
 
-Process.o: src/Process.cpp 
+Process.o: src/Process.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Process.o src/Process.cpp
 
-SafeQueue.o: src/SafeQueue.cpp 
+SafeQueue.o: src/SafeQueue.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SafeQueue.o src/SafeQueue.cpp
 
-Thread.o: src/Thread.cpp 
+Thread.o: src/Thread.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Thread.o src/Thread.cpp
 
-moc_MainWindow.o: moc_MainWindow.cpp 
+moc_MainWindow.o: moc_MainWindow.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_MainWindow.o moc_MainWindow.cpp
 
 ####### Install
@@ -848,4 +844,3 @@ install:  FORCE
 uninstall:  FORCE
 
 FORCE:
-

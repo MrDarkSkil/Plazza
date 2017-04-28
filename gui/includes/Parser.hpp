@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Wed Apr 19 12:23:03 2017 Leo Hubert Froideval
-** Last update Thu Apr 20 14:23:49 2017 gastal_r
+** Last update Fri Apr 28 13:08:40 2017 gastal_r
 */
 
 #ifndef PARSER_HPP_
@@ -15,6 +15,10 @@
 #include <regex>
 #include <iostream>
 #include <fstream>
+#include <dirent.h>
+#include <vector>
+#include <cstring>
+#include <semaphore.h>
 
 #include "Exception.hpp"
 #include "Orders.hpp"

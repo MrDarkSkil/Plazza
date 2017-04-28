@@ -8,14 +8,11 @@
 ** Last update	Sat Apr 15 19:43:08 2017 gastal_r
 */
 
-#include    <semaphore.h>
-#include    <fcntl.h>
 #include    "Orders.hpp"
 #include    "Mutex.hpp"
 #include    "ScopedLock.hpp"
 #include    "Thread.hpp"
 #include    "CondVar.hpp"
-#include    "SafeQueue.hpp"
 #include    "Plazza.hpp"
 
 int		main(int ac, char const *av[])

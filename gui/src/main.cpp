@@ -8,15 +8,11 @@
 ** Last update	Sat Apr 15 19:43:08 2017 gastal_r
 */
 
-#include    "Orders.hpp"
 #include    "Mutex.hpp"
 #include    "ScopedLock.hpp"
 #include    "Thread.hpp"
 #include    "CondVar.hpp"
-#include    "SafeQueue.hpp"
 #include    "Plazza.hpp"
-#include    "MainWindow.hpp"
-#include    "NamedPipe.hpp"
 
 int		main(int ac, char *av[])
 {
@@ -37,13 +33,16 @@ int		main(int ac, char *av[])
   Orders	order;
   Plazza  plazza;
 
+  sem_t *sem = sem_open("/tmp", O_CREAT, 0644, 1);
+  sem_init(sem, 0, 1);
   win.show();
   for (std::string line; std::getline(std::cin, line);)
     {
-      //std::cout << "line == " << line << std::endl;
       order.clear();
-      if (order.parseLine(line) == -1)
-	     return -1;
+      order.epur(line);
+      if (line != "")
+        if (order.parseLine(line) == -1)
+	       return -1;
        plazza.dividOrders(order.getOrders(), std::stoi(av[1]), win);
     }
 

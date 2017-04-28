@@ -5,12 +5,14 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu Apr 20 11:11:05 2017 gastal_r
-// Last update Wed Apr 26 02:22:40 2017 gastal_r
+// Last update Fri Apr 28 22:14:34 2017 gastal_r
 //
 
 #ifndef       _PLAZZA_HPP_
 #define       _PLAZZA_HPP_
 
+#include      <semaphore.h>
+#include      <fcntl.h>
 #include      <vector>
 #include      <thread>
 #include      <chrono>
@@ -22,7 +24,7 @@
 class         Plazza
 {
 public:
-  Plazza();
+  Plazza() {};
 
   void         dividOrders(std::vector<std::pair<std::string, Information>> &, int, MainWindow &);
   static void  *startParser(void *);
