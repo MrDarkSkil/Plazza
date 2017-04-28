@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Wed Apr 19 12:32:15 2017 Leo Hubert Froideval
-** Last update Fri Apr 28 13:10:30 2017 gastal_r
+** Last update Fri Apr 28 13:40:25 2017 Leo Hubert Froideval
 */
 
 #include "Parser.hpp"
@@ -82,6 +82,7 @@ void Parser::parseFile()
 {
     sem_t *sem = sem_open("/tmp", 0);
     std::regex rgx("");
+    Crypted cr;
     std::string file;
     std::string word;
     std::string line;
@@ -98,51 +99,44 @@ void Parser::parseFile()
     else if (_information == Information::EMAIL_ADDRESS)
         rgx = "(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+";
     else if (_information == Information::PHONE_NUMBER)
-        rgx = "[[:digit:]]{2}[[:digit:]]{2}[[:digit:]]{2}[[:digit:]]{2}[[:digit:]]{2}";
+        rgx = "[[:digit:]]{2}(\\ )?[[:digit:]]{2}(\\ )?[[:digit:]]{2}(\\ )?[[:digit:]]{2}(\\ )?[[:digit:]]{2}";
 
-    if (afile.is_open()) {
-        while (std::getline(afile, line)) {
-            file += line;
-        }
-
+    if (afile.is_open() && result == true)
+    {
         while (found == false)
         {
-            std::istringstream iss(file);
-
-            while(iss >> word)
+            while (std::getline(afile, line))
             {
-                if (regex_search(word, match, rgx))
+                while (regex_search(line, match, rgx))
                 {
                     sem_wait(sem);
                     std::cout << match[0] << std::endl;
+                    line = match.suffix().str();
                     found = true;
                     sem_post(sem);
                 }
             }
-
             if (found == false)
             {
-                // if (caesar < 255)
-                // {
-                //     file = Crypted::decryptCaesar(file, 1);
-                //     caesar++;
-                // }
-                //
-                // if (xxor < 32767)
-                // {
-                //     file = Crypted::decryptXor(file, 1);
-                //     xxor++;
-                // }
+                if (caesar < 255)
+                {
+                   file = cr.decryptCaesar(file, 1);
+                   caesar++;
+                }
 
+                if (xxor < 32767 && caesar == 255)
+                {
+                   file = cr.decryptXor(file, 1);
+                   xxor++;
+                }
+                if (xxor == 32767 && caesar == 255)
+                   return;
             }
         }
-
-
-
-
         afile.close();
     }
-    else {
+    else
+    {
         std::cerr << "File " << _file << " not found." << std::endl;
     }
 }
