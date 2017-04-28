@@ -14,8 +14,6 @@ std::string	Crypted::decryptXor(std::string str, int key)
 {
   std::string	tmp = str;
 
-  if (key == 0)
-    return (str);
   for (unsigned int i = 0 ; i < str.length() ; ++i)
     tmp[i] ^= key;
   return (tmp);
@@ -25,8 +23,6 @@ std::string	Crypted::decryptCaesar(std::string str, int key)
 {
   std::string	tmp = str;
 
-  if (key == 0)
-    return (str);
   for (unsigned int i = 0 ; i < str.length() ; ++i)
     {
       if (tmp[i] + key < 127)

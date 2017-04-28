@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Wed Apr 19 12:32:15 2017 Leo Hubert Froideval
-** Last update Fri Apr 28 13:56:52 2017 Leo Hubert Froideval
+** Last update Fri Apr 28 16:05:02 2017 Leo Hubert Froideval
 */
 
 #include "Parser.hpp"
@@ -108,9 +108,9 @@ void Parser::parseFile()
             while (std::getline(afile, line))
             {
                 if (caesar < 255 && caesar != 0)
-                   line = cr.decryptCaesar(file, caesar);
+                   line = cr.decryptCaesar(line, caesar);
                 if (xxor < 32767 && caesar == 255 && xxor != 0)
-                   line = cr.decryptXor(file, xxor);
+                   line = cr.decryptXor(line, xxor);
                 while (regex_search(line, match, rgx))
                 {
                     sem_wait(sem);
