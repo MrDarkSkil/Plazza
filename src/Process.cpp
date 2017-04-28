@@ -20,7 +20,7 @@ int          Process::checkThreadSlot()
 {
   for (int i = 0; i < _nbThreads; ++i)
   {
-    std::cerr << "Thread [" << i << "] status: " << (int) _thread.at(i).getStatus() << std::endl;
+    //std::cerr << "Thread [" << i << "] status: " << (int) _thread.at(i).getStatus() << std::endl;
     if (_thread.at(i).getStatus() == Thread::Status::NOT_STARTED
         || _thread.at(i).getStatus() == Thread::Status::DEAD)
       return (i);
@@ -33,7 +33,7 @@ void            Process::start()
   pid_t pid = fork();
   if (pid == 0)
   {
-    std::cout << "NEW PROCESS" << std::endl;
+    //std::cout << "NEW PROCESS" << std::endl;
     for (const auto & it : _orders)
     {
       int pos;
@@ -43,7 +43,7 @@ void            Process::start()
     }
     for (auto & it : _thread)
       it.waitThread();
-    std::cout << "EXIT PROCESS" << std::endl;
+    //std::cout << "EXIT PROCESS" << std::endl;
     exit(0);
   }
   else if (pid < 0)

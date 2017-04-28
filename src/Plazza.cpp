@@ -15,7 +15,7 @@ void          *Plazza::startParser(void *status)
 {
     Parser  parser("",(Information)1);
   Thread::Data *data = (Thread::Data *) status;
-  std::cout << "ENTER THREAD" << "\n";
+ // std::cout << "ENTER THREAD" << "\n";
 
   parser.setFile(data->getOrders().first);
   parser.setInformation((Information)data->getOrders().second);
