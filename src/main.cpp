@@ -8,6 +8,8 @@
 ** Last update	Sat Apr 15 19:43:08 2017 gastal_r
 */
 
+#include    <semaphore.h>
+#include    <fcntl.h>
 #include    "Orders.hpp"
 #include    "Mutex.hpp"
 #include    "ScopedLock.hpp"
@@ -28,7 +30,8 @@ int		main(int ac, char const *av[])
     std::cout << "Thread number need to be positive" << "\n";
     return (0);
   }
-
+  sem_t *sem = sem_open("/tmp", O_CREAT, 0644, 1);
+  sem_init(sem, 0, 1);
   Orders	order;
   Plazza	plazza;
   for (std::string line; std::getline(std::cin, line);)
