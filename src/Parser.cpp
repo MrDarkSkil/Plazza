@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Wed Apr 19 12:32:15 2017 Leo Hubert Froideval
-** Last update Fri Apr 28 11:01:40 2017 Leo Hubert Froideval
+** Last update Fri Apr 28 11:17:10 2017 Leo Hubert Froideval
 */
 
 #include "Parser.hpp"
@@ -83,6 +83,7 @@ void Parser::parseFile()
     std::string file;
     std::string word;
     std::string line;
+    std::smatch match;
     bool found = false;
     int caesar = 0;
     short xxor = 0;
@@ -107,9 +108,9 @@ void Parser::parseFile()
             std::istringstream iss(file);
 
             while(iss >> word) {
-                if (regex_match(word, rgx))
+                if (regex_search(word, match, rgx))
                 {
-                    std::cout << word << std::endl;
+                    std::cout << match[0] << std::endl;
                     found = true;
                 }
             }
