@@ -8,15 +8,11 @@
 ** Last update	Sat Apr 15 19:43:08 2017 gastal_r
 */
 
-#include    "Orders.hpp"
 #include    "Mutex.hpp"
 #include    "ScopedLock.hpp"
 #include    "Thread.hpp"
 #include    "CondVar.hpp"
-#include    "SafeQueue.hpp"
 #include    "Plazza.hpp"
-#include    "MainWindow.hpp"
-#include    "NamedPipe.hpp"
 
 int		main(int ac, char *av[])
 {
@@ -39,6 +35,8 @@ int		main(int ac, char *av[])
   bool	isList;
   std::string line;
 
+  sem_t *sem = sem_open("/tmp", O_CREAT, 0644, 1);
+  sem_init(sem, 0, 1);
   win.show();
       // std::getline(std::cin, line);
       // order.clear();

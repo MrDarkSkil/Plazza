@@ -19,7 +19,6 @@ CXXFLAGS	+=	-Wextra -Wall -W
 SRC             =       src/main.cpp		\
 			src/Orders.cpp		\
 			src/Parser.cpp		\
-			src/SafeQueue.cpp	\
 			src/Process.cpp		\
 			src/Thread.cpp		\
 			src/Mutex.cpp		\

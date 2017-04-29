@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Wed Apr 19 16:48:04 2017 gastal_r
-// Last update Sat Apr 22 21:25:31 2017 gastal_r
+// Last update Fri Apr 28 21:52:57 2017 gastal_r
 //
 
 #ifndef       _PROCESS_HPP_
@@ -27,8 +27,7 @@ public:
   Process(const std::vector<std::pair<std::string, Information>> &, int);
 
   int      checkThreadSlot();
-
-  void        start();
+  void     start();
 
 private:
   std::vector<std::pair<std::string, Information>>   _orders;
