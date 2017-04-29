@@ -5,7 +5,7 @@
 // Login   <flavien.sellet@epitech.eu>
 //
 // Started on  Thu Apr 13 14:34:02 2017 sellet_f
-// Last update Mon Apr 24 14:53:36 2017 sellet_f
+// Last update Fri Apr 28 14:10:52 2017 sellet_f
 //
 
 #include "Orders.hpp"
@@ -59,6 +59,12 @@ int						Orders::fillOrders(std::string &command)
 
   pos = 0;
   info = Information::UNDEFINED;
+  std::cout << "TOKEN == " << command;
+  while (command.at(0) == ' ')
+    command.erase(0,1);
+  if (command.size() == 0)
+    return (-1);
+  std::cout << " ==> " << command << std::endl;
   while ((pos = command.find(" ")) != std::string::npos)
     {
       newOrder = make_pair(std::string(""), Information::UNDEFINED);
@@ -100,14 +106,14 @@ int		Orders::parseLine(std::string &commands)
 {
   std::string	token;
   size_t	pos;
-  Parser    parser(" ", Information::UNDEFINED);
+  Parser	parser(" ", Information::UNDEFINED);
 
   while ((pos = commands.find(";")) != std::string::npos)
     {
       token = commands.substr(0, pos);
-      if (token != "")
+      if (token.size() > 0)
 	Orders::fillOrders(token);
-      commands.erase(0, pos +  2);
+      commands.erase(0, pos +  1);
     }
   token = commands.substr(0, pos);
   if (token != "")

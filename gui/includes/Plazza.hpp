@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu Apr 20 11:11:05 2017 gastal_r
-// Last update Wed Apr 26 02:22:40 2017 gastal_r
+// Last update Fri Apr 28 11:11:57 2017 sellet_f
 //
 
 #ifndef       _PLAZZA_HPP_
@@ -19,6 +19,7 @@
 #include      "NamedPipe.hpp"
 #include      "MainWindow.hpp"
 
+class MainWindow;
 class         Plazza
 {
 public:

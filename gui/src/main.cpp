@@ -33,28 +33,29 @@ int		main(int ac, char *av[])
 
   QApplication app(ac, av);
 
-  MainWindow win;
-  Orders	order;
   Plazza  plazza;
+  Orders	order;
+  MainWindow win(plazza, order, av[1]);
+  bool	isList;
+  std::string line;
 
   win.show();
-  for (std::string line; std::getline(std::cin, line);)
-    {
-      //std::cout << "line == " << line << std::endl;
-      order.clear();
-      if (order.parseLine(line) == -1)
-	     return -1;
-       plazza.dividOrders(order.getOrders(), std::stoi(av[1]), win);
-    }
+      // std::getline(std::cin, line);
+      // order.clear();
+      // if (order.parseLine(line) == -1)
+      // 	return -1;
+      // plazza.dividOrders(order.getOrders(), std::stoi(av[1]), win);
 
   while (1)
   {
+    isList = false;
     std::vector<size_t>  &proc = plazza.getProcess();
     std::vector<NamedPipe::Data>  data;
 
     data.clear();
     for (size_t i = 0; i < proc.size(); ++i)
     {
+      isList = true;
       NamedPipe::Data tmp;
       NamedPipe np(std::to_string(proc.at(i)));
       np.readContent(tmp);
@@ -67,6 +68,8 @@ int		main(int ac, char *av[])
         data.push_back(tmp);
       QCoreApplication::processEvents();
     }
+    if (isList == false)
+      QCoreApplication::processEvents();
     win.refreshList(data);
   }
   return (app.exec());
