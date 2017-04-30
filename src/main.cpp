@@ -27,8 +27,7 @@ int		main(int ac, char const *av[])
     std::cout << "Thread number need to be positive" << "\n";
     return (0);
   }
-  sem_t *sem = sem_open("/tmp", O_CREAT, 0644, 1);
-  sem_init(sem, 0, 1);
+  sem_open("plazza", O_CREAT, 0644, 1);
   Orders	order;
   Plazza	plazza;
   for (std::string line; std::getline(std::cin, line);)
