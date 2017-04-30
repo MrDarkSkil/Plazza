@@ -14,6 +14,7 @@
 #include    "Thread.hpp"
 #include    "CondVar.hpp"
 #include    "Plazza.hpp"
+#include    "NamedPipe.hpp"
 
 int		main(int ac, char const *av[])
 {
@@ -27,9 +28,9 @@ int		main(int ac, char const *av[])
     std::cout << "Thread number need to be positive" << "\n";
     return (0);
   }
-  sem_open("plazza", O_CREAT, 0644, 1);
   Orders	order;
   Plazza	plazza;
+  NamedPipe nm("1");
   for (std::string line; std::getline(std::cin, line);)
     {
       order.clear();
@@ -39,5 +40,6 @@ int		main(int ac, char const *av[])
 	  return -1;
       plazza.dividOrders(order.getOrders(), std::stoi(av[1]));
     }
+    nm.destroy();
   return (0);
 }

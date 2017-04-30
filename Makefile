@@ -5,7 +5,7 @@
 ## Login   <remi.gastaldi@epitech.eu>
 ##
 ## Started on  Sat Apr 29 23:26:33 2017 gastal_r
-## Last update Sat Apr 29 23:30:45 2017 gastal_r
+## Last update Sun Apr 30 19:34:56 2017 gastal_r
 ##
 
 ECHO            =       /bin/echo -e
@@ -32,6 +32,7 @@ SRC             =       src/main.cpp		\
 			src/Thread.cpp		\
 			src/Mutex.cpp		\
 			src/Plazza.cpp		\
+			src/NamedPipe.cpp	\
 			src/Crypted.cpp
 
 OBJ             =       $(SRC:.cpp=.o)

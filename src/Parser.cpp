@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Wed Apr 19 12:32:15 2017 Leo Hubert Froideval
-** Last update Sun Apr 30 19:16:59 2017 gastal_r
+** Last update Sun Apr 30 19:54:06 2017 gastal_r
 */
 
 #include "Parser.hpp"
@@ -80,7 +80,6 @@ void Parser::setInformation(Information const &information)
 
 void Parser::parseFile()
 {
-    sem_t *sem = sem_open("plazza", 0);
     std::regex rgx("");
     Crypted cr;
     std::string file;
@@ -108,7 +107,6 @@ void Parser::parseFile()
       {
         if (regex_search(line, match, rgx))
         {
-          sem_wait(sem);
           for (const auto & it : match)
           {
             if (_information == Information::EMAIL_ADDRESS && std::string(it).find(" ") != std::string::npos)
@@ -116,7 +114,6 @@ void Parser::parseFile()
             else
               std::cout << std::string(it) << std::endl;
           }
-          sem_post(sem);
           found = true;
         }
       }
@@ -148,7 +145,6 @@ void Parser::parseFile()
             }
             if (regex_search(line, match, rgx))
             {
-              sem_wait(sem);
               for (const auto & it : match)
               {
                 if (_information == Information::EMAIL_ADDRESS && std::string(it).find(" ") != std::string::npos)
@@ -156,14 +152,12 @@ void Parser::parseFile()
                 else
                   std::cout << std::string(it) << std::endl;
               }
-              sem_post(sem);
               found = true;
               checkEncrypt = true;
             }
           }
           if (checkEncrypt == false && regex_search(line, match, rgx))
           {
-            sem_wait(sem);
             for (const auto & it : match)
             {
               if (_information == Information::EMAIL_ADDRESS && std::string(it).find(" ") != std::string::npos)
@@ -171,7 +165,6 @@ void Parser::parseFile()
               else
                 std::cout << std::string(it) << std::endl;
             }
-            sem_post(sem);
           }
           else if (checkEncrypt == false)
             checkEncrypt = true;
