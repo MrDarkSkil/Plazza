@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Wed Apr 19 12:32:15 2017 Leo Hubert Froideval
-** Last update Sun Apr 30 18:58:48 2017 gastal_r
+** Last update Sun Apr 30 19:17:26 2017 gastal_r
 */
 
 #include "Parser.hpp"
@@ -179,6 +179,4 @@ void Parser::parseFile()
       }
       afile.close();
     }
-    else
-      std::cerr << "File " << _file << " not found." << std::endl;
 }
