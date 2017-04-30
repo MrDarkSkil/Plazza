@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Wed Apr 19 12:32:15 2017 Leo Hubert Froideval
-** Last update Sun Apr 30 19:54:06 2017 gastal_r
+** Last update Sun Apr 30 22:30:39 2017 gastal_r
 */
 
 #include "Parser.hpp"
@@ -89,7 +89,6 @@ void Parser::parseFile()
     bool found = false;
     int caesar = 0;
     int xxor = -1;
-    bool checkEncrypt = false;
     std::string path;
     bool result = findFile(_file, ".", path);
     std::ifstream afile(path, std::ios::in);
@@ -124,6 +123,8 @@ void Parser::parseFile()
         std::string tmp(line);
         while (std::getline(afile, line))
         {
+          xxor = -1;
+          caesar = 0;
           while (xxor < 32767  && found == false)
           {
             if (caesar < 255)
@@ -144,19 +145,9 @@ void Parser::parseFile()
               xxor++;
             }
             if (regex_search(line, match, rgx))
-            {
-              for (const auto & it : match)
-              {
-                if (_information == Information::EMAIL_ADDRESS && std::string(it).find(" ") != std::string::npos)
-                  std::cout << std::string(it).substr(0, std::string(it).find_last_of(" ")) << std::endl;
-                else
-                  std::cout << std::string(it) << std::endl;
-              }
               found = true;
-              checkEncrypt = true;
-            }
           }
-          if (checkEncrypt == false && regex_search(line, match, rgx))
+          if (regex_search(line, match, rgx))
           {
             for (const auto & it : match)
             {
@@ -166,8 +157,6 @@ void Parser::parseFile()
                 std::cout << std::string(it) << std::endl;
             }
           }
-          else if (checkEncrypt == false)
-            checkEncrypt = true;
         }
       }
       afile.close();

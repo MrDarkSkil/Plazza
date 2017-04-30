@@ -36,8 +36,6 @@ int		main(int ac, char *av[])
   bool	isList;
   std::string line;
 
-  sem_t *sem = sem_open("plazza", O_CREAT, 0644, 1);
-  sem_init(sem, 0, 1);
   win.show();
 
   while (1)

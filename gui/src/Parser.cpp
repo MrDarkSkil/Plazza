@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Wed Apr 19 12:32:15 2017 Leo Hubert Froideval
-** Last update Sun Apr 30 19:17:26 2017 gastal_r
+** Last update Sun Apr 30 22:27:27 2017 gastal_r
 */
 
 #include "Parser.hpp"
@@ -80,7 +80,6 @@ void Parser::setInformation(Information const &information)
 
 void Parser::parseFile()
 {
-    sem_t *sem = sem_open("plazza", 0);
     std::regex rgx("");
     Crypted cr;
     std::string file;
@@ -90,7 +89,6 @@ void Parser::parseFile()
     bool found = false;
     int caesar = 0;
     int xxor = -1;
-    bool checkEncrypt = false;
     std::string path;
     bool result = findFile(_file, ".", path);
     std::ifstream afile(path, std::ios::in);
@@ -108,7 +106,6 @@ void Parser::parseFile()
       {
         if (regex_search(line, match, rgx))
         {
-          sem_wait(sem);
           for (const auto & it : match)
           {
             if (_information == Information::EMAIL_ADDRESS && std::string(it).find(" ") != std::string::npos)
@@ -116,7 +113,6 @@ void Parser::parseFile()
             else
               std::cout << std::string(it) << std::endl;
           }
-          sem_post(sem);
           found = true;
         }
       }
@@ -127,6 +123,8 @@ void Parser::parseFile()
         std::string tmp(line);
         while (std::getline(afile, line))
         {
+          xxor = -1;
+          caesar = 0;
           while (xxor < 32767  && found == false)
           {
             if (caesar < 255)
@@ -147,23 +145,10 @@ void Parser::parseFile()
               xxor++;
             }
             if (regex_search(line, match, rgx))
-            {
-              sem_wait(sem);
-              for (const auto & it : match)
-              {
-                if (_information == Information::EMAIL_ADDRESS && std::string(it).find(" ") != std::string::npos)
-                  std::cout << std::string(it).substr(0, std::string(it).find_last_of(" ")) << std::endl;
-                else
-                  std::cout << std::string(it) << std::endl;
-              }
-              sem_post(sem);
               found = true;
-              checkEncrypt = true;
-            }
           }
-          if (checkEncrypt == false && regex_search(line, match, rgx))
+          if (regex_search(line, match, rgx))
           {
-            sem_wait(sem);
             for (const auto & it : match)
             {
               if (_information == Information::EMAIL_ADDRESS && std::string(it).find(" ") != std::string::npos)
@@ -171,10 +156,7 @@ void Parser::parseFile()
               else
                 std::cout << std::string(it) << std::endl;
             }
-            sem_post(sem);
           }
-          else if (checkEncrypt == false)
-            checkEncrypt = true;
         }
       }
       afile.close();

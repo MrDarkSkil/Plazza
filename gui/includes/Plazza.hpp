@@ -5,14 +5,12 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu Apr 20 11:11:05 2017 gastal_r
-// Last update Sun Apr 30 17:15:16 2017 gastal_r
+// Last update Sun Apr 30 22:26:24 2017 gastal_r
 //
 
 #ifndef       _PLAZZA_HPP_
 #define       _PLAZZA_HPP_
 
-#include      <semaphore.h>
-#include      <fcntl.h>
 #include      <vector>
 #include      <thread>
 #include      <chrono>
