@@ -21,6 +21,7 @@
 #include      "NamedPipe.hpp"
 #include      "MainWindow.hpp"
 
+class MainWindow;
 class         Plazza
 {
 public:

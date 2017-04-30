@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Mon Apr 24 14:35:28 2017 gastal_r
-// Last update Wed Apr 26 01:54:20 2017 gastal_r
+// Last update Fri Apr 28 11:32:33 2017 sellet_f
 //
 
 #ifndef _MAINWINDOW_HPP_
@@ -13,24 +13,31 @@
 
 #include      <QtGui>
 #include      <vector>
+#include      <QTextEdit>
 #include "ui_mainwindow.h"
-#include "NamedPipe.hpp"
 #include "IThread.hh"
+#include "Plazza.hpp"
 
+class Plazza;
 class MainWindow : public QMainWindow, private Ui::MainWindow
 {
-    Q_OBJECT
+  Q_OBJECT
 
 public:
-    explicit MainWindow();
-
-    void     refreshList(const std::vector<NamedPipe::Data> &);
+  explicit MainWindow(Plazza &, Orders &, char *);
+  void     refreshList(const std::vector<NamedPipe::Data> &);
+							      
+public slots:
+  void	handleButton(void);
 
 protected:
-    void closeEvent(QCloseEvent *event) override;
+  void closeEvent(QCloseEvent *event) override;
 
-  private slots:
-  private:
+private slots:
+private:
+  Plazza &	       _plazza;
+  Orders &	       _order;
+  char		       *_av;
 };
 
 #endif /* !_MAINWINDOW_HPP_ */

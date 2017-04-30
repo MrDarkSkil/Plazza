@@ -5,16 +5,29 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Mon Apr 24 15:18:54 2017 gastal_r
-// Last update Thu Apr 27 14:05:56 2017 gastal_r
+// Last update Fri Apr 28 11:34:13 2017 sellet_f
 //
 
 #include      "MainWindow.hpp"
 #include      <iostream>
 
-MainWindow::MainWindow()
+MainWindow::MainWindow(Plazza &plazza, Orders &order, char *av) : _plazza(plazza), _order(order), _av(av)
 {
   setupUi(this);
   setWindowTitle("Plazza");
+  QObject::connect(pushButton, SIGNAL(clicked()), this, SLOT(handleButton()));
+}
+
+void	MainWindow::handleButton(void)
+{
+  std::string line;
+
+  line = lineEdit->text().toStdString();
+  _order.clear();
+  if (_order.parseLine(line) == -1)
+    return ;
+  _plazza.dividOrders(_order.getOrders(), std::stoi(_av), *this);
+  lineEdit->clear();
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
