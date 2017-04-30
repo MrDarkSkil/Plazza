@@ -5,7 +5,7 @@
 ** Login   <leohubertfroideval@epitech.net>
 **
 ** Started on  Wed Apr 19 12:32:15 2017 Leo Hubert Froideval
-** Last update Fri Apr 28 16:05:02 2017 Leo Hubert Froideval
+** Last update Sun Apr 30 02:27:06 2017 gastal_r
 */
 
 #include "Parser.hpp"
@@ -89,50 +89,80 @@ void Parser::parseFile()
     std::smatch match;
     bool found = false;
     int caesar = 0;
-    short xxor = 0;
+    int xxor = -1;
+    bool checkEncrypt = false;
     std::string path;
     bool result = findFile(_file, ".", path);
     std::ifstream afile(path, std::ios::in);
 
     if (_information == Information::IP_ADDRESS)
-        rgx = "(\\d{1,3}(\\.\\d{1,3}){3})";
+      rgx = "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)[.]){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
     else if (_information == Information::EMAIL_ADDRESS)
-        rgx = "(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+";
+      rgx = "[a-zA-Z0-9_.-]+@[a-zA-Z0-9_.-]+.[a-zA-Z]+";
     else if (_information == Information::PHONE_NUMBER)
-        rgx = "[[:digit:]]{2}(\\ )?[[:digit:]]{2}(\\ )?[[:digit:]]{2}(\\ )?[[:digit:]]{2}(\\ )?[[:digit:]]{2}";
+      rgx = "0[0-9][ ]?[0-9][0-9][ ]?[0-9][0-9][ ]?[0-9][0-9][ ]?[0-9][0-9]";
 
     if (afile.is_open() && result == true)
     {
-        while (found == false)
+      while (std::getline(afile, line))
+      {
+        if (regex_search(line, match, rgx))
         {
-            while (std::getline(afile, line))
-            {
-                if (caesar < 255 && caesar != 0)
-                   line = cr.decryptCaesar(line, caesar);
-                if (xxor < 32767 && caesar == 255 && xxor != 0)
-                   line = cr.decryptXor(line, xxor);
-                while (regex_search(line, match, rgx))
-                {
-                    sem_wait(sem);
-                    std::cout << match[0] << std::endl;
-                    line = match.suffix().str();
-                    found = true;
-                    sem_post(sem);
-                }
-            }
-            if (found == false)
-            {
-                if (caesar < 255)
-                    caesar++;
-                if (xxor < 32767 && caesar == 255)
-                    xxor++;
-                if (xxor >= 32767 && caesar >= 255)
-                   return;
-                afile.clear();
-                afile.seekg(0, std::ios::beg);
-            }
+          sem_wait(sem);
+          for (const auto & it : match)
+            std::cout << std::string(it) << std::endl;
+          sem_post(sem);
+          found = true;
         }
-        afile.close();
+      }
+      if (!found)
+      {
+        afile.seekg(0, std::ios::beg);
+        found = false;
+        std::string tmp(line);
+        while (std::getline(afile, line))
+        {
+          while (xxor < 32767  && found == false)
+          {
+            if (caesar < 255)
+            {
+              line = cr.decryptCaesar(line, caesar);
+              caesar++;
+            }
+            else if (xxor == -1)
+            {
+              line  = tmp;
+              afile.clear();
+              afile.seekg(0, std::ios::beg);
+              xxor++;
+            }
+            else if (xxor < 32767)
+            {
+              line = cr.decryptXor(line, xxor);
+              xxor++;
+            }
+            if (regex_search(line, match, rgx))
+            {
+              sem_wait(sem);
+              for (const auto & it : match)
+                std::cout << std::string(it) << std::endl;
+              sem_post(sem);
+              found = true;
+              checkEncrypt = true;
+            }
+          }
+          if (checkEncrypt == false && regex_search(line, match, rgx))
+          {
+            sem_wait(sem);
+            for (const auto & it : match)
+              std::cout << std::string(it) << std::endl;
+            sem_post(sem);
+          }
+          else if (checkEncrypt == false)
+            checkEncrypt = true;
+        }
+      }
+      afile.close();
     }
     else
     {
