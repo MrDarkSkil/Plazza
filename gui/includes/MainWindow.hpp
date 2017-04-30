@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Mon Apr 24 14:35:28 2017 gastal_r
-// Last update Fri Apr 28 11:32:33 2017 sellet_f
+// Last update Sun Apr 30 16:58:01 2017 gastal_r
 //
 
 #ifndef _MAINWINDOW_HPP_
@@ -26,9 +26,10 @@ class MainWindow : public QMainWindow, private Ui::MainWindow
 public:
   explicit MainWindow(Plazza &, Orders &, char *);
   void     refreshList(const std::vector<NamedPipe::Data> &);
-							      
+
 public slots:
   void	handleButton(void);
+  void	handleButton2(void);
 
 protected:
   void closeEvent(QCloseEvent *event) override;

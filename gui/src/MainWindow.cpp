@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Mon Apr 24 15:18:54 2017 gastal_r
-// Last update Fri Apr 28 11:34:13 2017 sellet_f
+// Last update Sun Apr 30 17:15:29 2017 gastal_r
 //
 
 #include      "MainWindow.hpp"
@@ -16,6 +16,7 @@ MainWindow::MainWindow(Plazza &plazza, Orders &order, char *av) : _plazza(plazza
   setupUi(this);
   setWindowTitle("Plazza");
   QObject::connect(pushButton, SIGNAL(clicked()), this, SLOT(handleButton()));
+  QObject::connect(pushButton_2, SIGNAL(clicked()), this, SLOT(handleButton2()));
 }
 
 void	MainWindow::handleButton(void)
@@ -28,6 +29,19 @@ void	MainWindow::handleButton(void)
     return ;
   _plazza.dividOrders(_order.getOrders(), std::stoi(_av), *this);
   lineEdit->clear();
+}
+
+void	MainWindow::handleButton2(void)
+{
+  std::string line;
+
+  while (std::getline(std::cin, line))
+  {
+    _order.clear();
+    if (_order.parseLine(line) == -1)
+ 	    return;
+    _plazza.dividOrders(_order.getOrders(), std::stoi(_av), *this);
+  }
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)

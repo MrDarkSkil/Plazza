@@ -31,6 +31,7 @@ int		main(int ac, char *av[])
 
   Plazza  plazza;
   Orders	order;
+
   MainWindow win(plazza, order, av[1]);
   bool	isList;
   std::string line;
@@ -38,11 +39,6 @@ int		main(int ac, char *av[])
   sem_t *sem = sem_open("/tmp", O_CREAT, 0644, 1);
   sem_init(sem, 0, 1);
   win.show();
-      // std::getline(std::cin, line);
-      // order.clear();
-      // if (order.parseLine(line) == -1)
-      // 	return -1;
-      // plazza.dividOrders(order.getOrders(), std::stoi(av[1]), win);
 
   while (1)
   {

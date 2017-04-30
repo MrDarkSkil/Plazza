@@ -5,7 +5,7 @@
 // Login   <remi.gastaldi@epitech.eu>
 //
 // Started on  Thu Apr 20 11:11:05 2017 gastal_r
-// Last update Fri Apr 28 22:14:34 2017 gastal_r
+// Last update Sun Apr 30 17:15:16 2017 gastal_r
 //
 
 #ifndef       _PLAZZA_HPP_
@@ -30,7 +30,8 @@ public:
   void         dividOrders(std::vector<std::pair<std::string, Information>> &, int, MainWindow &);
   static void  *startParser(void *);
 
-  std::vector<size_t> &getProcess() { return (_process); }
+
+  std::vector<size_t> &getProcess(void) { return (_process); }
 
 private:
   std::vector<size_t>  _process;
